@@ -87,7 +87,7 @@ Class Field_limits_ft extends EE_Fieldtype
 				'id' => 'field_limits_rows',
 				'name' => 'field_limits_rows',
 				'type' => 'number',
-				'value' => ''
+				'value' => isset($data['field_limits_rows']) ? $data['field_limits_rows'] : ''
 			))
 		);
 
@@ -97,29 +97,37 @@ Class Field_limits_ft extends EE_Fieldtype
 				'id' => 'field_limits_max_length',
 				'name' => 'field_limits_max_length',
 				'type' => 'number',
-				'value' => ''
+				'value' => isset($data['field_limits_max_length']) ? $data['field_limits_max_length'] : ''
 			))
 		);
 
 		ee()->table->add_row(
 			lang('field_limits_format', 'field_limits_format'),
-			form_dropdown('field_limits_format', array(
-				'' => lang('field_limits_none'),
-				'all' => lang('field_limits_all'),
-				'xhtml' => lang('field_limits_xhtml'),
-				'br' => lang('field_limits_br') . ' &lt;br /&gt;',
-				'lite' => lang('field_limits_lite')
-			))
+			form_dropdown(
+				'field_limits_format',
+				array(
+					'' => lang('field_limits_none'),
+					'all' => lang('field_limits_all'),
+					'xhtml' => lang('field_limits_xhtml'),
+					'br' => lang('field_limits_br') . ' &lt;br /&gt;',
+					'lite' => lang('field_limits_lite')
+				),
+				isset($data['field_limits_format']) ? $data['field_limits_format'] : ''
+			)
 		);
 
 		ee()->table->add_row(
 			lang('field_limits_content', 'field_limits_content'),
-			form_dropdown('field_limits_content', array(
-				'' => lang('field_limits_any'),
-				'num' => lang('field_limits_number'),
-				'int' => lang('field_limits_int'),
-				'float' => lang('field_limits_float')
-			))
+			form_dropdown(
+				'field_limits_content',
+				array(
+					'' => lang('field_limits_any'),
+					'num' => lang('field_limits_number'),
+					'int' => lang('field_limits_int'),
+					'float' => lang('field_limits_float')
+				),
+				isset($data['field_limits_content']) ? $data['field_limits_content'] : ''
+			)
 		);
 	}
 
@@ -143,7 +151,7 @@ Class Field_limits_ft extends EE_Fieldtype
 				'id' => 'grid_field_limits_rows',
 				'name' => 'field_limits_rows',
 				'type' => 'number',
-				'value' => ''
+				'value' => isset($data['field_limits_rows']) ? $data['field_limits_rows'] : ''
 			)) .
 			'</div>';
 
@@ -153,29 +161,37 @@ Class Field_limits_ft extends EE_Fieldtype
 				'id' => 'grid_field_limits_max_length',
 				'name' => 'field_limits_max_length',
 				'type' => 'number',
-				'value' => ''
+				'value' => isset($data['field_limits_max_length']) ? $data['field_limits_max_length'] : ''
 			)) .
 			'</div>';
 
 		$settings[] = lang('field_limits_format', 'grid_field_limits_format') .
 			'<div class="grid-input">' .
-			form_dropdown('field_limits_format', array(
-				'' => lang('field_limits_none'),
-				'all' => lang('field_limits_all'),
-				'xhtml' => lang('field_limits_xhtml'),
-				'br' => lang('field_limits_br') . ' &lt;br /&gt;',
-				'lite' => lang('field_limits_lite')
-			)) .
+			form_dropdown(
+				'field_limits_format',
+				array(
+					'' => lang('field_limits_none'),
+					'all' => lang('field_limits_all'),
+					'xhtml' => lang('field_limits_xhtml'),
+					'br' => lang('field_limits_br') . ' &lt;br /&gt;',
+					'lite' => lang('field_limits_lite')
+				),
+				isset($data['field_limits_format']) ? $data['field_limits_format'] : ''
+			) .
 			'</div>';
 
 		$settings[] = lang('field_limits_content', 'grid_field_limits_content') .
 			'<div class="grid-input">' .
-			form_dropdown('field_limits_content', array(
-				'' => lang('field_limits_any'),
-				'num' => lang('field_limits_number'),
-				'int' => lang('field_limits_int'),
-				'float' => lang('field_limits_float')
-			)) .
+			form_dropdown(
+				'field_limits_content',
+				array(
+					'' => lang('field_limits_any'),
+					'num' => lang('field_limits_number'),
+					'int' => lang('field_limits_int'),
+					'float' => lang('field_limits_float')
+				),
+				isset($data['field_limits_content']) ? $data['field_limits_content'] : ''
+			) .
 			'</div>';
 
 		return $settings;
