@@ -80,45 +80,45 @@ Class Field_limits_ft extends EE_Fieldtype
 		$this->addSettingsAssets();
 
 		ee()->table->add_row(
-			lang('field_limit_rows', 'field_limit_rows') .
+			lang('field_limits_rows', 'field_limits_rows') .
 				'<br>' .
-				lang('field_limit_rows_explain'),
+				lang('field_limits_rows_explain'),
 			form_input(array(
-				'id' => 'field_limit_rows',
-				'name' => 'field_limit_rows',
+				'id' => 'field_limits_rows',
+				'name' => 'field_limits_rows',
 				'type' => 'number',
 				'value' => ''
 			))
 		);
 
 		ee()->table->add_row(
-			lang('field_limit_max_length', 'field_limit_max_length'),
+			lang('field_limits_max_length', 'field_limits_max_length'),
 			form_input(array(
-				'id' => 'field_limit_max_length',
-				'name' => 'field_limit_max_length',
+				'id' => 'field_limits_max_length',
+				'name' => 'field_limits_max_length',
 				'type' => 'number',
 				'value' => ''
 			))
 		);
 
 		ee()->table->add_row(
-			lang('field_limit_format', 'field_limit_format'),
-			form_dropdown('field_limit_format', array(
-				'' => lang('field_limit_none'),
-				'all' => lang('field_limit_all'),
-				'xhtml' => lang('field_limit_xhtml'),
-				'br' => lang('field_limit_br') . ' &lt;br /&gt;',
-				'lite' => lang('field_limit_lite')
+			lang('field_limits_format', 'field_limits_format'),
+			form_dropdown('field_limits_format', array(
+				'' => lang('field_limits_none'),
+				'all' => lang('field_limits_all'),
+				'xhtml' => lang('field_limits_xhtml'),
+				'br' => lang('field_limits_br') . ' &lt;br /&gt;',
+				'lite' => lang('field_limits_lite')
 			))
 		);
 
 		ee()->table->add_row(
-			lang('field_limit_content', 'field_limit_content'),
-			form_dropdown('field_limit_content', array(
-				'' => lang('field_limit_any'),
-				'num' => lang('field_limit_number'),
-				'int' => lang('field_limit_int'),
-				'float' => lang('field_limit_float')
+			lang('field_limits_content', 'field_limits_content'),
+			form_dropdown('field_limits_content', array(
+				'' => lang('field_limits_any'),
+				'num' => lang('field_limits_number'),
+				'int' => lang('field_limits_int'),
+				'float' => lang('field_limits_float')
 			))
 		);
 	}
@@ -135,50 +135,119 @@ Class Field_limits_ft extends EE_Fieldtype
 
 		$settings = array();
 
-		$settings[] = lang('field_limit_rows', 'grid_field_limit_rows') .
+		$settings[] = lang('field_limits_rows', 'grid_field_limits_rows') .
 			'<br>' .
-			lang('field_limit_rows_explain') .
+			lang('field_limits_rows_explain') .
 			'<div class="grid-input">' .
 			form_input(array(
-				'id' => 'grid_field_limit_rows',
-				'name' => 'field_limit_rows',
+				'id' => 'grid_field_limits_rows',
+				'name' => 'field_limits_rows',
 				'type' => 'number',
 				'value' => ''
 			)) .
 			'</div>';
 
-		$settings[] = lang('field_limit_max_length', 'grid_field_limit_max_length') .
+		$settings[] = lang('field_limits_max_length', 'grid_field_limits_max_length') .
 			'<div class="grid-input">' .
 			form_input(array(
-				'id' => 'grid_field_limit_max_length',
-				'name' => 'field_limit_max_length',
+				'id' => 'grid_field_limits_max_length',
+				'name' => 'field_limits_max_length',
 				'type' => 'number',
 				'value' => ''
 			)) .
 			'</div>';
 
-		$settings[] = lang('field_limit_format', 'field_limit_format') .
+		$settings[] = lang('field_limits_format', 'grid_field_limits_format') .
 			'<div class="grid-input">' .
-			form_dropdown('field_limit_format', array(
-				'' => lang('field_limit_none'),
-				'all' => lang('field_limit_all'),
-				'xhtml' => lang('field_limit_xhtml'),
-				'br' => lang('field_limit_br') . ' &lt;br /&gt;',
-				'lite' => lang('field_limit_lite')
+			form_dropdown('field_limits_format', array(
+				'' => lang('field_limits_none'),
+				'all' => lang('field_limits_all'),
+				'xhtml' => lang('field_limits_xhtml'),
+				'br' => lang('field_limits_br') . ' &lt;br /&gt;',
+				'lite' => lang('field_limits_lite')
 			)) .
 			'</div>';
 
-		$settings[] = lang('field_limit_content', 'grid_field_limit_content') .
+		$settings[] = lang('field_limits_content', 'grid_field_limits_content') .
 			'<div class="grid-input">' .
-			form_dropdown('field_limit_content', array(
-				'' => lang('field_limit_any'),
-				'num' => lang('field_limit_number'),
-				'int' => lang('field_limit_int'),
-				'float' => lang('field_limit_float')
+			form_dropdown('field_limits_content', array(
+				'' => lang('field_limits_any'),
+				'num' => lang('field_limits_number'),
+				'int' => lang('field_limits_int'),
+				'float' => lang('field_limits_float')
 			)) .
 			'</div>';
 
 		return $settings;
+	}
+
+	/**
+	 * Validate field settings
+	 *
+	 * @param array $data Field data
+	 */
+	public function validate_settings($data)
+	{
+		ee()->form_validation->set_rules(
+			array(
+				array(
+					'field' => 'field_limits_rows',
+					'label' => 'lang:field_limits_rows',
+					'rules' => 'is_natural'
+				),
+				array(
+					'field' => 'field_limits_max_length',
+					'label' => 'lang:field_limits_max_length',
+					'rules' => 'is_natural'
+				)
+			)
+		);
+	}
+
+	/**
+	 * Validate grid settings
+	 *
+	 * @param array $data Field data
+	 * @return string|bool
+	 */
+	public function grid_validate_settings($data)
+	{
+		$errorMessage = array();
+
+		if (
+			isset($data['field_limits_rows']) &&
+			$data['field_limits_rows'] &&
+			! ctype_digit($data['field_limits_rows'])
+		) {
+			$errorMessage[] = lang('field_limits_rows_must_be_number');
+		}
+
+		if (
+			isset($data['field_limits_max_length']) &&
+			$data['field_limits_max_length'] &&
+			! ctype_digit($data['field_limits_max_length'])
+		) {
+			$errorMessage[] = lang('field_limits_max_length_must_be_number');
+		}
+
+		if ($errorMessage) {
+			return implode('<br>', $errorMessage);
+		}
+
+		return true;
+	}
+
+	public function save_settings($data)
+	{
+		$saveData = array();
+
+		foreach ($data as $saveKey => $save) {
+			if (strncmp('field_limits_', $saveKey, 13) === 0) {
+				$saveData[$saveKey] = $save;
+			}
+		}
+
+		return $saveData;
 	}
 
 	/**
