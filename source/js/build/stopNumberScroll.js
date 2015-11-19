@@ -3,7 +3,7 @@
 
 	F.fn.make('stopNumberScroll', {
 		init: function() {
-			$('.pageContents').on('mousewheel', ':input[type=number]', function() {
+			$('.contents').on('mousewheel', ':input[type=number]', function() {
 				this.blur();
 			});
 		}

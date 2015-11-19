@@ -48,7 +48,7 @@ Class Field_limits_ft extends EE_Fieldtype
 	/**
 	 * Add settings assets
 	 */
-	public function addSettingsAssets()
+	public function addAssets($pageType)
 	{
 		if (! ee()->session->cache('fieldLimits', 'settingsAssetsLoaded')) {
 			ee()->cp->load_package_css('fieldLimits.min');
@@ -58,7 +58,7 @@ Class Field_limits_ft extends EE_Fieldtype
 				'window.fieldLimits = window.fieldLimits || {};' .
 				'fieldLimits.vars = fieldLimits.vars || {};' .
 				'fieldLimits.lang = fieldLimits.lang || {};' .
-				'fieldLimits.vars.pageType = "settings";'
+				'fieldLimits.vars.pageType = "' . $pageType . '";'
 			);
 
 			ee()->session->set_cache(
@@ -77,7 +77,7 @@ Class Field_limits_ft extends EE_Fieldtype
 	 */
 	public function display_settings($data)
 	{
-		$this->addSettingsAssets();
+		$this->addAssets('settings');
 
 		ee()->table->add_row(
 			lang('field_limits_rows', 'field_limits_rows') .
@@ -139,7 +139,7 @@ Class Field_limits_ft extends EE_Fieldtype
 	 */
 	public function grid_display_settings($data)
 	{
-		$this->addSettingsAssets();
+		$this->addAssets('settings');
 
 		$settings = array();
 
@@ -274,6 +274,61 @@ Class Field_limits_ft extends EE_Fieldtype
 	 */
 	public function display_field($data)
 	{
-		return '';
+		$this->addAssets('field');
+
+		$output = '<div class="field-limits-field js-field-limits-field">';
+
+		$settings = array(
+			'field_limits_rows' => null,
+			'field_limits_max_length' => null,
+			'field_limits_format' => null,
+			'field_limits_content' => null
+		);
+
+		foreach ($this->settings as $key => $val) {
+			if (strncmp('field_limits_', $key, 13) === 0) {
+				if ($key === 'field_limits_rows' or $key === 'field_limits_max_length') {
+					$val = (int) $val;
+				}
+
+				$settings[$key] = $val;
+			}
+		}
+
+		$inputSettings = array(
+			'name' => $this->field_name,
+			'value' => $data,
+			'class' => 'field-limits-field__input'
+		);
+
+		if ($this->settings['field_required'] === 'y') {
+			$inputSettings['required'] = true;
+		}
+
+		if ($settings['field_limits_rows'] < 2) {
+			if ($settings['field_limits_content'] === 'int') {
+				$inputSettings['type'] = 'number';
+			} else {
+				$inputSettings['type'] = 'text';
+			}
+
+			$output .= form_input($inputSettings);
+		} else {
+			$inputSettings['rows'] = $settings['field_limits_rows'];
+			$inputSettings['cols'] = false;
+
+			$output .= form_textarea($inputSettings);
+		}
+
+		$output .= '</div>';
+
+		if ($settings['field_limits_max_length']) {
+			$output .= '<div class="field-limits-count js-field-limits-count-wrap">';
+			$output .= '<span class="js-field-limits-count">' . strlen($data) . '</span> / ';
+			$output .= '<span class="js-field-limits-limit">' . $settings['field_limits_max_length'] . '</span>';
+			$output .= '</div>';
+		}
+
+		return $output;
 	}
 }
