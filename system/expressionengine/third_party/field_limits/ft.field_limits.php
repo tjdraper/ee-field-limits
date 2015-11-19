@@ -276,8 +276,6 @@ Class Field_limits_ft extends EE_Fieldtype
 	{
 		$this->addAssets('field');
 
-		$output = '<div class="field-limits-field js-field-limits-field">';
-
 		$settings = array(
 			'field_limits_rows' => null,
 			'field_limits_max_length' => null,
@@ -295,10 +293,24 @@ Class Field_limits_ft extends EE_Fieldtype
 			}
 		}
 
+		$output = '<div class="field-limits-field';
+
+		if ($settings['field_limits_max_length']) {
+			$output .= ' js-field-limits-limited';
+		}
+
+		$output .= '"';
+
+		if ($settings['field_limits_max_length']) {
+			$output .= 'data-limit="' . $settings['field_limits_max_length'] . '"';
+		}
+
+		$output .= '>';
+
 		$inputSettings = array(
 			'name' => $this->field_name,
 			'value' => $data,
-			'class' => 'field-limits-field__input'
+			'class' => 'field-limits-field__input js-field-limits-input'
 		);
 
 		if ($this->settings['field_required'] === 'y') {
@@ -320,14 +332,14 @@ Class Field_limits_ft extends EE_Fieldtype
 			$output .= form_textarea($inputSettings);
 		}
 
-		$output .= '</div>';
-
 		if ($settings['field_limits_max_length']) {
 			$output .= '<div class="field-limits-count js-field-limits-count-wrap">';
 			$output .= '<span class="js-field-limits-count">' . strlen($data) . '</span> / ';
 			$output .= '<span class="js-field-limits-limit">' . $settings['field_limits_max_length'] . '</span>';
 			$output .= '</div>';
 		}
+
+		$output .= '</div>';
 
 		return $output;
 	}

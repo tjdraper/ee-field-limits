@@ -6,7 +6,8 @@
 			'stopNumberScroll'
 		],
 		field: [
-			'stopNumberScroll'
+			'stopNumberScroll',
+			'fieldCharLimit'
 		]
 	};
 })(window.FAB);
