@@ -46,6 +46,30 @@ Class Field_limits_ft extends EE_Fieldtype
 	}
 
 	/**
+	 * Add settings assets
+	 */
+	public function addSettingsAssets()
+	{
+		if (! ee()->session->cache('fieldLimits', 'settingsAssetsLoaded')) {
+			ee()->cp->load_package_css('fieldLimits.min');
+			ee()->cp->load_package_js('fieldLimits.min');
+
+			ee()->javascript->output(
+				'window.fieldLimits = window.fieldLimits || {};' .
+				'fieldLimits.vars = fieldLimits.vars || {};' .
+				'fieldLimits.lang = fieldLimits.lang || {};' .
+				'fieldLimits.vars.pageType = "settings";'
+			);
+
+			ee()->session->set_cache(
+				'fieldLimits',
+				'settingsAssetsLoaded',
+				true
+			);
+		}
+	}
+
+	/**
 	 * Settings
 	 *
 	 * @param string $data Existing setting data
@@ -53,6 +77,7 @@ Class Field_limits_ft extends EE_Fieldtype
 	 */
 	public function display_settings($data)
 	{
+		$this->addSettingsAssets();
 
 		ee()->table->add_row(
 			lang('field_limit_rows', 'field_limit_rows') .
@@ -106,6 +131,8 @@ Class Field_limits_ft extends EE_Fieldtype
 	 */
 	public function grid_display_settings($data)
 	{
+		$this->addSettingsAssets();
+
 		$settings = array();
 
 		$settings[] = lang('field_limit_rows', 'grid_field_limit_rows') .

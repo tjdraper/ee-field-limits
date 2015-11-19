@@ -108,14 +108,14 @@ module.exports = function(grunt) {
 		notify: {
 			less: {
 				options: {
-					title: "CSS",
-					message: "CSS compiled successfully"
+					title: 'CSS',
+					message: 'CSS compiled successfully'
 				}
 			},
 			uglify: {
 				options: {
-					title: "Javascript",
-					message: "Javascript compiled successfully"
+					title: 'Javascript',
+					message: 'Javascript compiled successfully'
 				}
 			}
 		},
