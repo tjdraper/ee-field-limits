@@ -138,39 +138,45 @@ Class Field_limits_ft extends EE_Fieldtype
 		$settings[] = lang('field_limit_rows', 'grid_field_limit_rows') .
 			'<br>' .
 			lang('field_limit_rows_explain') .
+			'<div class="grid-input">' .
 			form_input(array(
 				'id' => 'grid_field_limit_rows',
 				'name' => 'field_limit_rows',
 				'type' => 'number',
 				'value' => ''
-			));
+			)) .
+			'</div>';
 
 		$settings[] = lang('field_limit_max_length', 'grid_field_limit_max_length') .
+			'<div class="grid-input">' .
 			form_input(array(
 				'id' => 'grid_field_limit_max_length',
 				'name' => 'field_limit_max_length',
 				'type' => 'number',
 				'value' => ''
-			));
+			)) .
+			'</div>';
 
 		$settings[] = lang('field_limit_format', 'field_limit_format') .
-			'<br>' .
+			'<div class="grid-input">' .
 			form_dropdown('field_limit_format', array(
 				'' => lang('field_limit_none'),
 				'all' => lang('field_limit_all'),
 				'xhtml' => lang('field_limit_xhtml'),
 				'br' => lang('field_limit_br') . ' &lt;br /&gt;',
 				'lite' => lang('field_limit_lite')
-			));
+			)) .
+			'</div>';
 
 		$settings[] = lang('field_limit_content', 'grid_field_limit_content') .
-			'<br>' .
+			'<div class="grid-input">' .
 			form_dropdown('field_limit_content', array(
 				'' => lang('field_limit_any'),
 				'num' => lang('field_limit_number'),
 				'int' => lang('field_limit_int'),
 				'float' => lang('field_limit_float')
-			));
+			)) .
+			'</div>';
 
 		return $settings;
 	}
