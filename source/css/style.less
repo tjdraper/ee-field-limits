@@ -27,3 +27,41 @@
 		.border(#a49745);
 	}
 }
+
+
+
+
+
+/*------------------------------------*\
+	# Fix EE styling of inputs in Grid
+\*------------------------------------*/
+
+.grid_field input[type=number] {
+	.border(#c8cfd8);
+	.rounded(0);
+	.padding(6px);
+	&:focus {
+		.background-color(#fbfaed);
+		.border(#a49745);
+	}
+}
+
+
+
+
+
+/*------------------------------------*\
+	# Field Limits
+\*------------------------------------*/
+
+.field-limits-count {
+	.font-size(10px);
+	.margin(8px; false; 8px; 2px);
+	&.\--warning {
+		.bold();
+		.color(#b49502);
+	}
+	&.\--limit-reached {
+		.color(#b41302);
+	}
+}
