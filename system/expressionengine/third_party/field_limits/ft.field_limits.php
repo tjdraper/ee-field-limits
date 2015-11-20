@@ -313,6 +313,10 @@ Class Field_limits_ft extends EE_Fieldtype
 			'class' => 'field-limits-field__input js-field-limits-input'
 		);
 
+		if ($settings['field_limits_max_length']) {
+			$inputSettings['maxlength'] = $settings['field_limits_max_length'];
+		}
+
 		if ($this->settings['field_required'] === 'y') {
 			$inputSettings['required'] = true;
 		}
