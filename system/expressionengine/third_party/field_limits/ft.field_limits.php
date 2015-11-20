@@ -370,6 +370,42 @@ Class Field_limits_ft extends EE_Fieldtype
 		return $saveData;
 	}
 
+	private $defaultFieldSettings = array(
+		'field_limits_rows' => null,
+		'field_limits_max_length' => null,
+		'field_limits_format' => null,
+		'field_limits_content' => null,
+		'field_limits_default_val' => null,
+		'field_limits_min' => null,
+		'field_limits_max' => null,
+		'field_limits_step' => null
+	);
+
+	private function getFieldSettings ($fieldSettings)
+	{
+		$settings = $this->defaultFieldSettings;
+
+		$intValueKeys = array(
+			'field_limits_rows',
+			'field_limits_max_length',
+			'field_limits_min',
+			'field_limits_max',
+			'field_limits_step'
+		);
+
+		foreach ($fieldSettings as $key => $val) {
+			if (strncmp('field_limits_', $key, 13) === 0) {
+				if (in_array($key, $intValueKeys)) {
+					$val = (int) $val;
+				}
+
+				$settings[$key] = $val;
+			}
+		}
+
+		return $settings;
+	}
+
 	/**
 	 * Display field
 	 *
@@ -380,26 +416,7 @@ Class Field_limits_ft extends EE_Fieldtype
 	{
 		$this->addAssets('field');
 
-		$settings = array(
-			'field_limits_rows' => null,
-			'field_limits_max_length' => null,
-			'field_limits_format' => null,
-			'field_limits_content' => null,
-			'field_limits_default_val' => null,
-			'field_limits_min' => null,
-			'field_limits_max' => null,
-			'field_limits_step' => null
-		);
-
-		foreach ($this->settings as $key => $val) {
-			if (strncmp('field_limits_', $key, 13) === 0) {
-				if ($key === 'field_limits_rows' or $key === 'field_limits_max_length') {
-					$val = (int) $val;
-				}
-
-				$settings[$key] = $val;
-			}
-		}
+		$settings = $this->getFieldSettings($this->settings);
 
 		$output = '<div class="field-limits-field';
 
@@ -466,5 +483,58 @@ Class Field_limits_ft extends EE_Fieldtype
 		$output .= '</div>';
 
 		return $output;
+	}
+
+	/**
+	 * Validate field data
+	 *
+	 * @param $data Submitted field data
+	 */
+	public function validate($data)
+	{
+		$errors = '';
+
+		$settings = $this->getFieldSettings($this->settings);
+
+		if ($settings['field_limits_rows'] < 2) {
+			if ($settings['field_limits_content'] === 'int') {
+				if (! ctype_digit($data)) {
+					$errors .= 'This field must contain a whole number' . '<br>';
+				}
+
+				if ($settings['field_limits_min']) {
+					if ((int) $data < $settings['field_limits_min']) {
+						$errors .= 'This field must be greater than ' . $settings['field_limits_min'] . '<br>';
+					}
+				}
+
+				if ($settings['field_limits_max']) {
+					if ((int) $data > $settings['field_limits_max']) {
+						$errors .= 'This field must be less than ' . $settings['field_limits_max'] . '<br>';
+					}
+				}
+			}
+
+			if ($settings['field_limits_content'] === 'num' and ! is_numeric($data)) {
+				$errors .= 'This field must contain numeric values only' . '<br>';
+			}
+
+			if ($settings['field_limits_content'] === 'float' and (ctype_digit($data) or ! is_numeric($data))) {
+				$errors .= 'This field must contain a decimal numeric value' . '<br>';
+			}
+		}
+
+		if (
+			$settings['field_limits_max_length'] and
+			strlen($data) > $settings['field_limits_max_length']
+		) {
+			$errrors .= 'This field character count must not be greater than ' . $settings['field_limits_max_length'] . '<br>';
+		}
+
+		if ($errors) {
+			return $errors;
+		}
+
+		return true;
 	}
 }
