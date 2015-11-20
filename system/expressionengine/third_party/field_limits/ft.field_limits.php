@@ -543,7 +543,6 @@ Class Field_limits_ft extends EE_Fieldtype
 	 *
 	 * @param string $fieldData The channel_data table data
 	 * @param array $tagParams
-	 * @param bool|string $tagData
 	 * @return string
 	 */
 	public function replace_tag($fieldData, $tagParams = array())
