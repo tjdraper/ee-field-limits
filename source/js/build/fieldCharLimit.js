@@ -23,7 +23,7 @@
 				$countWrapper = $el.children('.js-field-limits-count-wrap'),
 				$counter = $countWrapper.children('.js-field-limits-count'),
 				limit = $el.data('limit'),
-				warningLevel = limit * 0.7;
+				warningLevel = limit * 0.65;
 
 			$input.on('keyup', function() {
 				if ($input.val().length > limit) {
