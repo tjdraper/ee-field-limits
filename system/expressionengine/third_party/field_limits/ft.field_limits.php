@@ -537,4 +537,52 @@ Class Field_limits_ft extends EE_Fieldtype
 
 		return true;
 	}
+
+	/**
+	 * Replace tag pair
+	 *
+	 * @param string $fieldData The channel_data table data
+	 * @param array $tagParams
+	 * @param bool|string $tagData
+	 * @return string
+	 */
+	public function replace_tag($fieldData, $tagParams = array())
+	{
+		$allowedTypographys = array(
+			'all',
+			'xhtml',
+			'br',
+			'lite'
+		);
+
+		$format = false;
+
+		$settings = $this->getFieldSettings($this->settings);
+
+		if (
+			isset($tagParams['format']) and
+			in_array($tagParams['format'], $allowedTypographys)
+		) {
+			$format = $tagParams['format'];
+		} elseif (
+			! isset($tagParams['format']) and
+			in_array($settings['field_limits_format'], $allowedTypographys)
+		) {
+			$format = $settings['field_limits_format'];
+		}
+
+		if ($format) {
+			ee()->load->library('typography');
+			ee()->typography->initialize();
+
+			$fieldData = ee()->typography->parse_type($fieldData, array(
+				'text_format' => $format,
+				'html_format' => 'all',
+				'auto_links' => 'n',
+				'allow_img_url' => 'y'
+			));
+		}
+
+		return $fieldData;
+	}
 }
