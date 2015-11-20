@@ -16,5 +16,10 @@ $lang = array(
 	'field_limits_int' => 'Integer',
 	'field_limits_float' => 'Decimal (Float)',
 	'field_limits_rows_must_be_number' => 'Field Rows must be a whole number',
-	'field_limits_max_length_must_be_number' => 'Max Length must be a whole number'
+	'field_limits_max_length_must_be_number' => 'Max Length must be a whole number',
+	'field_limits_default_val' => 'Default Value',
+	'field_limits_min' => 'Input Min',
+	'field_limits_max' => 'Input Max',
+	'field_limits_step' => 'Input Step',
+	'field_limits_only_integer' => 'Applicable only if "Field Rows" is set to 1 and field type is set to integer'
 );

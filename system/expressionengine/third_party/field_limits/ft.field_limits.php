@@ -87,7 +87,8 @@ Class Field_limits_ft extends EE_Fieldtype
 				'id' => 'field_limits_rows',
 				'name' => 'field_limits_rows',
 				'type' => 'number',
-				'value' => isset($data['field_limits_rows']) ? $data['field_limits_rows'] : ''
+				'value' => isset($data['field_limits_rows']) ? $data['field_limits_rows'] : '',
+				'placeholder' => lang('field_limits_rows')
 			))
 		);
 
@@ -97,7 +98,8 @@ Class Field_limits_ft extends EE_Fieldtype
 				'id' => 'field_limits_max_length',
 				'name' => 'field_limits_max_length',
 				'type' => 'number',
-				'value' => isset($data['field_limits_max_length']) ? $data['field_limits_max_length'] : ''
+				'value' => isset($data['field_limits_max_length']) ? $data['field_limits_max_length'] : '',
+				'placeholder' => lang('field_limits_max_length')
 			))
 		);
 
@@ -129,6 +131,56 @@ Class Field_limits_ft extends EE_Fieldtype
 				isset($data['field_limits_content']) ? $data['field_limits_content'] : ''
 			)
 		);
+
+		ee()->table->add_row(
+			lang('field_limits_default_val', 'field_limits_default_val'),
+			form_input(array(
+				'id' => 'field_limits_default_val',
+				'name' => 'field_limits_default_val',
+				'type' => 'text',
+				'value' => isset($data['field_limits_default_val']) ? $data['field_limits_default_val'] : '',
+				'placeholder' => lang('field_limits_default_val')
+			))
+		);
+
+		ee()->table->add_row(
+			lang('field_limits_min', 'field_limits_min') .
+				'<br>' .
+				lang('field_limits_only_integer'),
+			form_input(array(
+				'id' => 'field_limits_min',
+				'name' => 'field_limits_min',
+				'type' => 'number',
+				'value' => isset($data['field_limits_min']) ? $data['field_limits_min'] : '',
+				'placeholder' => lang('field_limits_min')
+			))
+		);
+
+		ee()->table->add_row(
+			lang('field_limits_max', 'field_limits_max') .
+				'<br>' .
+				lang('field_limits_only_integer'),
+			form_input(array(
+				'id' => 'field_limits_max',
+				'name' => 'field_limits_max',
+				'type' => 'number',
+				'value' => isset($data['field_limits_max']) ? $data['field_limits_max'] : '',
+				'placeholder' => lang('field_limits_max')
+			))
+		);
+
+		ee()->table->add_row(
+			lang('field_limits_step', 'field_limits_step') .
+				'<br>' .
+				lang('field_limits_only_integer'),
+			form_input(array(
+				'id' => 'field_limits_step',
+				'name' => 'field_limits_step',
+				'type' => 'number',
+				'value' => isset($data['field_limits_step']) ? $data['field_limits_step'] : '',
+				'placeholder' => lang('field_limits_step')
+			))
+		);
 	}
 
 	/**
@@ -151,7 +203,8 @@ Class Field_limits_ft extends EE_Fieldtype
 				'id' => 'grid_field_limits_rows',
 				'name' => 'field_limits_rows',
 				'type' => 'number',
-				'value' => isset($data['field_limits_rows']) ? $data['field_limits_rows'] : ''
+				'value' => isset($data['field_limits_rows']) ? $data['field_limits_rows'] : '',
+				'placeholder' => lang('field_limits_rows')
 			)) .
 			'</div>';
 
@@ -161,7 +214,8 @@ Class Field_limits_ft extends EE_Fieldtype
 				'id' => 'grid_field_limits_max_length',
 				'name' => 'field_limits_max_length',
 				'type' => 'number',
-				'value' => isset($data['field_limits_max_length']) ? $data['field_limits_max_length'] : ''
+				'value' => isset($data['field_limits_max_length']) ? $data['field_limits_max_length'] : '',
+				'placeholder' => lang('field_limits_max_length')
 			)) .
 			'</div>';
 
@@ -192,6 +246,56 @@ Class Field_limits_ft extends EE_Fieldtype
 				),
 				isset($data['field_limits_content']) ? $data['field_limits_content'] : ''
 			) .
+			'</div>';
+
+		$settings[] = lang('field_limits_default_val', 'grid_field_limits_default_val') .
+			'<div class="grid-input">' .
+			form_input(array(
+				'id' => 'grid_field_limits_default_val',
+				'name' => 'field_limits_default_val',
+				'type' => 'number',
+				'value' => isset($data['field_limits_default_val']) ? $data['field_limits_default_val'] : '',
+				'placeholder' => lang('field_limits_default_val')
+			)) .
+			'</div>';
+
+		$settings[] = lang('field_limits_min', 'grid_field_limits_min') .
+			'<br>' .
+			lang('field_limits_only_integer') .
+			'<div class="grid-input">' .
+			form_input(array(
+				'id' => 'grid_field_limits_min',
+				'name' => 'field_limits_min',
+				'type' => 'number',
+				'value' => isset($data['field_limits_min']) ? $data['field_limits_min'] : '',
+				'placeholder' => lang('field_limits_min')
+			)) .
+			'</div>';
+
+		$settings[] = lang('field_limits_max', 'grid_field_limits_max') .
+			'<br>' .
+			lang('field_limits_only_integer') .
+			'<div class="grid-input">' .
+			form_input(array(
+				'id' => 'grid_field_limits_max',
+				'name' => 'field_limits_max',
+				'type' => 'number',
+				'value' => isset($data['field_limits_max']) ? $data['field_limits_max'] : '',
+				'placeholder' => lang('field_limits_max')
+			)) .
+			'</div>';
+
+		$settings[] = lang('field_limits_step', 'grid_field_limits_step') .
+			'<br>' .
+			lang('field_limits_only_integer') .
+			'<div class="grid-input">' .
+			form_input(array(
+				'id' => 'grid_field_limits_step',
+				'name' => 'field_limits_step',
+				'type' => 'number',
+				'value' => isset($data['field_limits_step']) ? $data['field_limits_step'] : '',
+				'placeholder' => lang('field_limits_step')
+			)) .
 			'</div>';
 
 		return $settings;
@@ -280,7 +384,11 @@ Class Field_limits_ft extends EE_Fieldtype
 			'field_limits_rows' => null,
 			'field_limits_max_length' => null,
 			'field_limits_format' => null,
-			'field_limits_content' => null
+			'field_limits_content' => null,
+			'field_limits_default_val' => null,
+			'field_limits_min' => null,
+			'field_limits_max' => null,
+			'field_limits_step' => null
 		);
 
 		foreach ($this->settings as $key => $val) {
@@ -309,7 +417,7 @@ Class Field_limits_ft extends EE_Fieldtype
 
 		$inputSettings = array(
 			'name' => $this->field_name,
-			'value' => $data,
+			'value' => $data ?: $settings['field_limits_default_val'],
 			'class' => 'field-limits-field__input js-field-limits-input'
 		);
 
@@ -324,6 +432,18 @@ Class Field_limits_ft extends EE_Fieldtype
 		if ($settings['field_limits_rows'] < 2) {
 			if ($settings['field_limits_content'] === 'int') {
 				$inputSettings['type'] = 'number';
+
+				if ($settings['field_limits_min']) {
+					$inputSettings['min'] = $settings['field_limits_min'];
+				}
+
+				if ($settings['field_limits_max']) {
+					$inputSettings['max'] = $settings['field_limits_max'];
+				}
+
+				if ($settings['field_limits_step']) {
+					$inputSettings['step'] = $settings['field_limits_step'];
+				}
 			} else {
 				$inputSettings['type'] = 'text';
 			}
