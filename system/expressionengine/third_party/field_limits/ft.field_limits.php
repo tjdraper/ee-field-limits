@@ -499,28 +499,28 @@ Class Field_limits_ft extends EE_Fieldtype
 		if ($settings['field_limits_rows'] < 2) {
 			if ($settings['field_limits_content'] === 'int') {
 				if (! ctype_digit($data)) {
-					$errors .= 'This field must contain a whole number' . '<br>';
+					$errors .= lang('field_limits_whole_number') . '<br>';
 				}
 
 				if ($settings['field_limits_min']) {
 					if ((int) $data < $settings['field_limits_min']) {
-						$errors .= 'This field must be greater than ' . $settings['field_limits_min'] . '<br>';
+						$errors .= lang('field_limits_greater_than') . $settings['field_limits_min'] . '<br>';
 					}
 				}
 
 				if ($settings['field_limits_max']) {
 					if ((int) $data > $settings['field_limits_max']) {
-						$errors .= 'This field must be less than ' . $settings['field_limits_max'] . '<br>';
+						$errors .= lang('field_limits_less_than') . $settings['field_limits_max'] . '<br>';
 					}
 				}
 			}
 
 			if ($settings['field_limits_content'] === 'num' and ! is_numeric($data)) {
-				$errors .= 'This field must contain numeric values only' . '<br>';
+				$errors .= lang('field_limits_numeric_only') . '<br>';
 			}
 
 			if ($settings['field_limits_content'] === 'float' and (ctype_digit($data) or ! is_numeric($data))) {
-				$errors .= 'This field must contain a decimal numeric value' . '<br>';
+				$errors .= lang('field_limits_decimal_value') . '<br>';
 			}
 		}
 
@@ -528,7 +528,7 @@ Class Field_limits_ft extends EE_Fieldtype
 			$settings['field_limits_max_length'] and
 			strlen($data) > $settings['field_limits_max_length']
 		) {
-			$errrors .= 'This field character count must not be greater than ' . $settings['field_limits_max_length'] . '<br>';
+			$errrors .= lang('field_lmits_char_count_not_greater_than') . $settings['field_limits_max_length'] . '<br>';
 		}
 
 		if ($errors) {

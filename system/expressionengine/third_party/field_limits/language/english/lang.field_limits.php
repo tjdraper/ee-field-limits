@@ -21,5 +21,13 @@ $lang = array(
 	'field_limits_min' => 'Input Min',
 	'field_limits_max' => 'Input Max',
 	'field_limits_step' => 'Input Step',
-	'field_limits_only_integer' => 'Applicable only if "Field Rows" is set to 1 and field type is set to integer'
+	'field_limits_only_integer' => 'Applicable only if "Field Rows" is set to 1 and field type is set to integer',
+
+	// Validation errors
+	'field_limits_whole_number' => 'This field must contain a whole number',
+	'field_limits_greater_than' => 'This field must be greater than ',
+	'field_limits_less_than' => 'This field must be less than ',
+	'field_limits_numeric_only' => 'This field must contain numeric values only',
+	'field_limits_decimal_value' => 'This field must contain a decimal numeric value',
+	'field_lmits_char_count_not_greater_than' => 'This field character count must not be greater than '
 );
