@@ -120,6 +120,9 @@ Class Field_limits_input_ft extends EE_Fieldtype
 		$assets = new Helper\Assets();
 		$assets->add('field');
 
+		$data = str_replace("&#039;", "'", $data);
+		$data = str_replace('&quot;', '"', $data);
+
 		ee()->javascript->output(
 			'fieldLimits.vars.fieldTypeNames = fieldLimits.vars.fieldTypeNames || [];' .
 			'fieldLimits.vars.fieldTypeNames.push("field_limits_input");'
@@ -147,6 +150,10 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	 */
 	public function validate($data)
 	{
+		if (! $data) {
+			return true;
+		}
+
 		$fieldSettings = new Helper\FieldSettings();
 
 		$settings = $fieldSettings->get(
@@ -157,7 +164,8 @@ Class Field_limits_input_ft extends EE_Fieldtype
 		$errors = '';
 
 		if ($settings['max_length'] and strlen($data) > $settings['max_length']) {
-			$errors .= lang('field_limits_char_count_not_greater_than') . $settings['field_limits_max_length'] . '<br>';
+			$errors .= lang('field_limits_char_count_not_greater_than') .
+				$settings['max_length'] . '<br>';
 		}
 
 		if ($errors) {

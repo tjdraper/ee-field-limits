@@ -4,7 +4,7 @@
 include_once(PATH_THIRD . 'field_limits/addon.setup.php');
 
 /**
- * Field Limits number field type
+ * Field Limits textarea field type
  *
  * @package field_limits
  * @author TJ Draper <tj@buzzingpixel.com>
@@ -15,11 +15,11 @@ include_once(PATH_THIRD . 'field_limits/addon.setup.php');
 use FieldLimits\Helper;
 use FieldLimits\Service;
 
-Class Field_limits_number_ft extends EE_Fieldtype
+Class Field_limits_textarea_ft extends EE_Fieldtype
 {
 	// Set EE fieldtype info
 	public $info = array(
-		'name' => 'Field Limits - Number',
+		'name' => 'Field Limits - Textarea',
 		'version' => FIELD_LIMITS_VER
 	);
 
@@ -59,15 +59,13 @@ Class Field_limits_number_ft extends EE_Fieldtype
 		$assets = new Helper\Assets();
 		$assets->add('settings');
 
-		$fields = new Helper\Fields($data, 'field_limits_number');
+		$fields = new Helper\Fields($data, 'field_limits_textarea');
 
-		$fields->fieldContent();
+		$fields->rows();
 
-		$fields->minNumber();
+		$fields->maxLength();
 
-		$fields->maxNumber();
-
-		$fields->step();
+		$fields->fieldFormatting();
 	}
 
 	/**
@@ -81,17 +79,15 @@ Class Field_limits_number_ft extends EE_Fieldtype
 		$assets = new Helper\Assets();
 		$assets->add('settings');
 
-		$fields = new Helper\Fields($data, 'field_limits_number');
+		$fields = new Helper\Fields($data, 'field_limits_textarea');
 
 		$settings = array();
 
-		$settings[] = $fields->gridFieldContent();
+		$settings[] = $fields->gridRows();
 
-		$settings[] = $fields->gridMinNumber();
+		$settings[] = $fields->gridMaxLength();
 
-		$settings[] = $fields->gridMaxNumber();
-
-		$settings[] = $fields->gridStep();
+		$settings[] = $fields->gridFieldFormatting();
 
 		return $settings;
 	}
@@ -106,17 +102,16 @@ Class Field_limits_number_ft extends EE_Fieldtype
 	{
 		$settingsArray = new Helper\SettingsArray();
 
-		return $settingsArray->get($data, 'field_limits_number');
+		return $settingsArray->get($data, 'field_limits_textarea');
 	}
 
 	/**
 	 * Default field settings
 	 */
 	private $defaultFieldSettings = array(
-		'content' => null,
-		'min' => null,
-		'max' => null,
-		'step' => null
+		'rows' => null,
+		'max_length' => null,
+		'format' => null
 	);
 
 	/**
@@ -130,9 +125,12 @@ Class Field_limits_number_ft extends EE_Fieldtype
 		$assets = new Helper\Assets();
 		$assets->add('field');
 
+		$data = str_replace("&#039;", "'", $data);
+		$data = str_replace('&quot;', '"', $data);
+
 		ee()->javascript->output(
 			'fieldLimits.vars.fieldTypeNames = fieldLimits.vars.fieldTypeNames || [];' .
-			'fieldLimits.vars.fieldTypeNames.push("field_limits_number");'
+			'fieldLimits.vars.fieldTypeNames.push("field_limits_textarea");'
 		);
 
 		$fieldSettings = new Helper\FieldSettings();
@@ -146,7 +144,7 @@ Class Field_limits_number_ft extends EE_Fieldtype
 		$settings['value'] = $data;
 		$settings['required'] = $this->settings['field_required'] === 'y';
 
-		return ee()->load->view('number', $settings, true);
+		return ee()->load->view('textarea', $settings, true);
 	}
 
 	/**
@@ -170,22 +168,9 @@ Class Field_limits_number_ft extends EE_Fieldtype
 
 		$errors = '';
 
-		if ($settings['content'] === 'num' and ! is_numeric($data)) {
-			$errors .= lang('field_limits_numeric_only') . '<br>';
-		}
-
-		if ($settings['content'] === 'int' and ! ctype_digit($data)) {
-			$errors .= lang('field_limits_whole_number') . '<br>';
-		}
-
-		if ($settings['min'] and (int) $data < $settings['min']) {
-			$errors .= lang('field_limits_greater_than') .
-				$settings['min'] . '<br>';
-		}
-
-		if ($settings['max'] and (int) $data > $settings['max']) {
-			$errors .= lang('field_limits_less_than') .
-				$settings['max'] . '<br>';
+		if ($settings['max_length'] and strlen($data) > $settings['max_length']) {
+			$errors .= lang('field_limits_char_count_not_greater_than') .
+				$settings['max_length'] . '<br>';
 		}
 
 		if ($errors) {

@@ -253,4 +253,40 @@ class Fields
 			)) .
 			'</div>';
 	}
+
+	/**
+	 * Add max length settings field
+	 */
+	public function rows()
+	{
+		ee()->table->add_row(
+			lang('field_limits_rows', $this->prefix . '_rows'),
+			form_input(array(
+				'id' => $this->prefix . '_rows',
+				'name' => $this->prefix . '_rows',
+				'type' => 'number',
+				'value' => isset($this->data['rows']) ? $this->data['rows'] : '',
+				'placeholder' => lang('field_limits_rows')
+			))
+		);
+	}
+
+	/**
+	 * Add grid max length settings field
+	 *
+	 * @return string
+	 */
+	public function gridRows()
+	{
+		return lang('field_limits_rows', 'grid_' . $this->prefix . '_rows') .
+		'<div class="grid-input">' .
+		form_input(array(
+			'id' => 'grid_' . $this->prefix . '_rows',
+			'name' => $this->prefix . '_rows',
+			'type' => 'number',
+			'value' => isset($this->data['rows']) ? $this->data['rows'] : '',
+			'placeholder' => lang('field_limits_rows')
+		)) .
+		'</div>';
+	}
 }

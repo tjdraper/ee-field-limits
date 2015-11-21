@@ -1,4 +1,5 @@
 <?php
+/** @var int $rows */
 /** @var int $max_length */
 /** @var string $field_name */
 /** @var string $value */
@@ -8,13 +9,12 @@
 <div
 	class="field-limits-field<?php if ($max_length) { ?> js-field-limits-limited<?php } ?>"
 	<?php if ($max_length) { ?>
-	data-limit="<?= $max_length ?>"
+		data-limit="<?= $max_length ?>"
 	<?php } ?>
 >
-	<input
-		type="text"
+	<textarea
 		name="<?= $field_name ?>"
-		value="<?= htmlentities($value) ?>"
+		rows="<?= $rows ?: 6 ?>"
 		<?php if ($max_length) { ?>
 		maxlength="<?= $max_length ?>"
 		<?php } ?>
@@ -22,7 +22,7 @@
 		<?php if ($required) { ?>
 		required
 		<?php } ?>
-	>
+	><?= $value ?></textarea>
 	<?php if ($max_length) { ?>
 		<?= ee()->load->view('embed/counter') ?>
 	<?php } ?>
