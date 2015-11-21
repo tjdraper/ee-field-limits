@@ -12,7 +12,7 @@
 			});
 
 			// Bind field initialization on Grid
-			Grid.bind('field_limits', 'display', function($cell) {
+			Grid.bind(F.$get('fieldTypeName'), 'display', function($cell) {
 				$cell.find('.js-field-limits-limited').each(function() {
 					scope.setLimits($(this));
 				});

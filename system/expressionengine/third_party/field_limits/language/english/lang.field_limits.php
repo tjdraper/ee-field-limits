@@ -29,5 +29,5 @@ $lang = array(
 	'field_limits_less_than' => 'This field must be less than ',
 	'field_limits_numeric_only' => 'This field must contain numeric values only',
 	'field_limits_decimal_value' => 'This field must contain a decimal numeric value',
-	'field_lmits_char_count_not_greater_than' => 'This field character count must not be greater than '
+	'field_limits_char_count_not_greater_than' => 'This field character count must not be greater than '
 );
