@@ -1,24 +1,35 @@
-/* global Grid */
+/* global jQuery, Grid */
 
 (function(F) {
 	'use strict';
 
 	F.fn.make('fieldCharLimit', {
 		init: function() {
-			var scope = this;
+			var scope = this,
+				$fieldTypeNames = F.$get('fieldTypeNames');
 
 			$('.js-field-limits-limited').each(function() {
 				scope.setLimits($(this));
 			});
 
-			// Bind field initialization on Grid
-			Grid.bind(F.$get('fieldTypeName'), 'display', function($cell) {
-				$cell.find('.js-field-limits-limited').each(function() {
-					scope.setLimits($(this));
+			if ($fieldTypeNames) {
+				$fieldTypeNames = jQuery.unique($fieldTypeNames);
+
+				$fieldTypeNames.forEach(function(i) {
+					// Bind field initialization on Grid
+					Grid.bind(i, 'display', function($cell) {
+						$cell.find('.js-field-limits-limited').each(function() {
+							scope.setLimits($(this));
+						});
+					});
 				});
-			});
+			}
 		},
 		setLimits: function($el) {
+			if ($el.data('limits-set')) {
+				return;
+			}
+
 			var $input = $el.children('.js-field-limits-input'),
 				$countWrapper = $el.children('.js-field-limits-count-wrap'),
 				$counter = $countWrapper.children('.js-field-limits-count'),
@@ -44,6 +55,8 @@
 					$countWrapper.removeClass('--limit-reached');
 				}
 			});
+
+			$el.data('limits-set', true);
 		}
 	});
 })(window.FAB);

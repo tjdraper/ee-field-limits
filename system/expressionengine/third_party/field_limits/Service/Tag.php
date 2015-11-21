@@ -39,6 +39,7 @@ class Tag
 			$format = $tagParams['format'];
 		} elseif (
 			! isset($tagParams['format']) and
+			isset($settings['format']) and
 			in_array($settings['format'], $allowedTypographys)
 		) {
 			$format = $settings['format'];

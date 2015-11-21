@@ -15,11 +15,11 @@ include_once(PATH_THIRD . 'field_limits/addon.setup.php');
 use FieldLimits\Helper;
 use FieldLimits\Service;
 
-Class Field_limits_input_ft extends EE_Fieldtype
+Class Field_limits_number_ft extends EE_Fieldtype
 {
 	// Set EE fieldtype info
 	public $info = array(
-		'name' => 'Field Limits - Input',
+		'name' => 'Field Limits - Number',
 		'version' => FIELD_LIMITS_VER
 	);
 
@@ -59,11 +59,15 @@ Class Field_limits_input_ft extends EE_Fieldtype
 		$assets = new Helper\Assets();
 		$assets->add('settings');
 
-		$fields = new Helper\Fields($data, 'field_limits_input');
+		$fields = new Helper\Fields($data, 'field_limits_number');
 
-		$fields->maxLength();
+		$fields->fieldContent();
 
-		$fields->fieldFormatting();
+		$fields->minNumber();
+
+		$fields->maxNumber();
+
+		$fields->step();
 	}
 
 	/**
@@ -77,13 +81,17 @@ Class Field_limits_input_ft extends EE_Fieldtype
 		$assets = new Helper\Assets();
 		$assets->add('settings');
 
-		$fields = new Helper\Fields($data, 'field_limits_input');
+		$fields = new Helper\Fields($data, 'field_limits_number');
 
 		$settings = array();
 
-		$settings[] = $fields->gridMaxLength();
+		$settings[] = $fields->gridFieldContent();
 
-		$settings[] = $fields->gridFieldFormatting();
+		$settings[] = $fields->gridMinNumber();
+
+		$settings[] = $fields->gridMaxNumber();
+
+		$settings[] = $fields->gridStep();
 
 		return $settings;
 	}
@@ -98,15 +106,17 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	{
 		$settingsArray = new Helper\SettingsArray();
 
-		return $settingsArray->get($data, 'field_limits_input');
+		return $settingsArray->get($data, 'field_limits_number');
 	}
 
 	/**
 	 * Default field settings
 	 */
 	private $defaultFieldSettings = array(
-		'max_length' => null,
-		'format' => null
+		'content' => null,
+		'min' => null,
+		'max' => null,
+		'step' => null
 	);
 
 	/**
@@ -122,7 +132,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 
 		ee()->javascript->output(
 			'fieldLimits.vars.fieldTypeNames = fieldLimits.vars.fieldTypeNames || [];' .
-			'fieldLimits.vars.fieldTypeNames.push("field_limits_input");'
+			'fieldLimits.vars.fieldTypeNames.push("field_limits_number");'
 		);
 
 		$fieldSettings = new Helper\FieldSettings();
@@ -136,7 +146,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 		$settings['value'] = $data;
 		$settings['required'] = $this->settings['field_required'] === 'y';
 
-		return ee()->load->view('input', $settings, true);
+		return ee()->load->view('number', $settings, true);
 	}
 
 	/**
@@ -147,6 +157,10 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	 */
 	public function validate($data)
 	{
+		if (! $data) {
+			return true;
+		}
+
 		$fieldSettings = new Helper\FieldSettings();
 
 		$settings = $fieldSettings->get(
@@ -156,8 +170,22 @@ Class Field_limits_input_ft extends EE_Fieldtype
 
 		$errors = '';
 
-		if ($settings['max_length'] and strlen($data) > $settings['max_length']) {
-			$errors .= lang('field_limits_char_count_not_greater_than') . $settings['field_limits_max_length'] . '<br>';
+		if ($settings['content'] === 'num' and ! is_numeric($data)) {
+			$errors .= lang('field_limits_numeric_only') . '<br>';
+		}
+
+		if ($settings['content'] === 'int' and ! ctype_digit($data)) {
+			$errors .= lang('field_limits_whole_number') . '<br>';
+		}
+
+		if ($settings['min'] and (int) $data < $settings['min']) {
+			$errors .= lang('field_limits_greater_than') .
+				$settings['min'] . '<br>';
+		}
+
+		if ($settings['max'] and (int) $data > $settings['max']) {
+			$errors .= lang('field_limits_less_than') .
+				$settings['max'] . '<br>';
 		}
 
 		if ($errors) {

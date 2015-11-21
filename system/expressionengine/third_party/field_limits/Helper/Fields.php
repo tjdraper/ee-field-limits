@@ -107,4 +107,150 @@ class Fields
 			) .
 			'</div>';
 	}
+
+	/**
+	 * Add field content settings field
+	 */
+	public function fieldContent()
+	{
+		ee()->table->add_row(
+			lang('field_limits_content', $this->prefix . '_content'),
+			form_dropdown(
+				$this->prefix . '_content',
+				array(
+					'num' => lang('field_limits_number'),
+					'int' => lang('field_limits_int'),
+				),
+				isset($this->data['content']) ? $this->data['content'] : ''
+			)
+		);
+	}
+
+	/**
+	 * Add grid field content settings field
+	 *
+	 * @return string
+	 */
+	public function gridFieldContent()
+	{
+		return lang('field_limits_content', 'grid_' . $this->prefix . '_content') .
+			'<div class="grid-input">' .
+			form_dropdown(
+				$this->prefix . '_content',
+				array(
+					'num' => lang('field_limits_number'),
+					'int' => lang('field_limits_int'),
+				),
+				isset($this->data['content']) ? $this->data['content'] : ''
+			) .
+			'</div>';
+	}
+
+	/**
+	 * Add min number settings field
+	 */
+	public function minNumber()
+	{
+		ee()->table->add_row(
+			lang('field_limits_min', $this->prefix . '_min'),
+			form_input(array(
+				'id' => $this->prefix . '_min',
+				'name' => $this->prefix . '_min',
+				'type' => 'number',
+				'value' => isset($this->data['min']) ? $this->data['min'] : '',
+				'placeholder' => lang('field_limits_min')
+			))
+		);
+	}
+
+	/**
+	 * Add grid min number settings field
+	 *
+	 * @return string
+	 */
+	public function gridMinNumber()
+	{
+		return lang('field_limits_min', 'grid_' . $this->prefix . '_min') .
+		'<div class="grid-input">' .
+			form_input(array(
+				'id' => 'grid_' . $this->prefix . '_min',
+				'name' => $this->prefix . '_min',
+				'type' => 'number',
+				'value' => isset($this->data['min']) ? $this->data['min'] : '',
+				'placeholder' => lang('field_limits_min')
+			)) .
+			'</div>';
+	}
+
+	/**
+	 * Add max number settings field
+	 */
+	public function maxNumber()
+	{
+		ee()->table->add_row(
+			lang('field_limits_max', $this->prefix . '_max'),
+			form_input(array(
+				'id' => $this->prefix . '_max',
+				'name' => $this->prefix . '_max',
+				'type' => 'number',
+				'value' => isset($this->data['max']) ? $this->data['max'] : '',
+				'placeholder' => lang('field_limits_max')
+			))
+		);
+	}
+
+	/**
+	 * Add grid max number settings field
+	 *
+	 * @return string
+	 */
+	public function gridMaxNumber()
+	{
+		return lang('field_limits_max', 'grid_' . $this->prefix . '_max') .
+			'<div class="grid-input">' .
+			form_input(array(
+				'id' => 'grid_' . $this->prefix . '_max',
+				'name' => $this->prefix . '_max',
+				'type' => 'number',
+				'value' => isset($this->data['max']) ? $this->data['max'] : '',
+				'placeholder' => lang('field_limits_max')
+			)) .
+			'</div>';
+	}
+
+	/**
+	 * Add step settings field
+	 */
+	public function step()
+	{
+		ee()->table->add_row(
+			lang('field_limits_step', $this->prefix . '_step'),
+			form_input(array(
+				'id' => $this->prefix . '_step',
+				'name' => $this->prefix . '_step',
+				'type' => 'number',
+				'value' => isset($this->data['step']) ? $this->data['step'] : '',
+				'placeholder' => lang('field_limits_step')
+			))
+		);
+	}
+
+	/**
+	 * Add grid step settings field
+	 *
+	 * @return string
+	 */
+	public function gridStep()
+	{
+		return lang('field_limits_step', 'grid_' . $this->prefix . '_step') .
+			'<div class="grid-input">' .
+			form_input(array(
+				'id' => 'grid_' . $this->prefix . '_step',
+				'name' => $this->prefix . '_step',
+				'type' => 'number',
+				'value' => isset($this->data['step']) ? $this->data['step'] : '',
+				'placeholder' => lang('field_limits_step')
+			)) .
+			'</div>';
+	}
 }

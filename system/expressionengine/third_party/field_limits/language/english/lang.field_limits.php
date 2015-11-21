@@ -12,7 +12,7 @@ $lang = array(
 	'field_limits_lite' => 'Lite',
 	'field_limits_content' => 'Field  Content',
 	'field_limits_any' => 'Any',
-	'field_limits_number' => 'Number (Integer or Float)',
+	'field_limits_number' => 'Float',
 	'field_limits_int' => 'Integer',
 	'field_limits_float' => 'Decimal (Float)',
 	'field_limits_rows_must_be_number' => 'Field Rows must be a whole number',
@@ -21,12 +21,11 @@ $lang = array(
 	'field_limits_min' => 'Input Min',
 	'field_limits_max' => 'Input Max',
 	'field_limits_step' => 'Input Step',
-	'field_limits_only_integer' => 'Applicable only if "Field Rows" is set to 1 and field type is set to integer',
 
 	// Validation errors
 	'field_limits_whole_number' => 'This field must contain a whole number',
-	'field_limits_greater_than' => 'This field must be greater than ',
-	'field_limits_less_than' => 'This field must be less than ',
+	'field_limits_greater_than' => 'This field must be greater than or equal to ',
+	'field_limits_less_than' => 'This field must be less than or equal to ',
 	'field_limits_numeric_only' => 'This field must contain numeric values only',
 	'field_limits_decimal_value' => 'This field must contain a decimal numeric value',
 	'field_limits_char_count_not_greater_than' => 'This field character count must not be greater than '
