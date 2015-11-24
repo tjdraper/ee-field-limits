@@ -4,6 +4,7 @@
 /** @var string $field_name */
 /** @var string $value */
 /** @var bool $required */
+/** @var bool $isGrid */
 ?>
 
 <div
@@ -19,8 +20,10 @@
 		maxlength="<?= $max_length ?>"
 		<?php } ?>
 		class="field-limits-field__input js-field-limits-input"
-		<?php if ($required) { ?>
+		<?php if (! $isGrid and $required) { ?>
 		required
+		<?php } elseif ($required) { ?>
+		data-grid-required="true"
 		<?php } ?>
 	><?= $value ?></textarea>
 	<?php if ($max_length) { ?>

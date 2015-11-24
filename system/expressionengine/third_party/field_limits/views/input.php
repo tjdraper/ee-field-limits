@@ -3,12 +3,13 @@
 /** @var string $field_name */
 /** @var string $value */
 /** @var bool $required */
+/** @var bool $isGrid */
 ?>
 
 <div
 	class="field-limits-field<?php if ($max_length) { ?> js-field-limits-limited<?php } ?>"
 	<?php if ($max_length) { ?>
-	data-limit="<?= $max_length ?>"
+		data-limit="<?= $max_length ?>"
 	<?php } ?>
 >
 	<input
@@ -19,8 +20,10 @@
 		maxlength="<?= $max_length ?>"
 		<?php } ?>
 		class="field-limits-field__input js-field-limits-input"
-		<?php if ($required) { ?>
+		<?php if (! $isGrid and $required) { ?>
 		required
+		<?php } elseif ($required) { ?>
+		data-grid-required="true"
 		<?php } ?>
 	>
 	<?php if ($max_length) { ?>

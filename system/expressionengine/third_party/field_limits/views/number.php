@@ -6,6 +6,7 @@
 /** @var string $field_name */
 /** @var string $value */
 /** @var bool $required */
+/** @var bool $isGrid */
 ?>
 
 <div class="field-limits-field">
@@ -25,8 +26,10 @@
 		<?php } elseif ($step) { ?>
 		step="<?= $step ?>"
 		<?php } ?>
-		<?php if ($required) { ?>
+		<?php if (! $isGrid and $required) { ?>
 		required
+		<?php } elseif ($required) { ?>
+		data-grid-required="true"
 		<?php } ?>
 	>
 </div>

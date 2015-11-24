@@ -145,6 +145,7 @@ Class Field_limits_number_ft extends EE_Fieldtype
 		$settings['field_name'] = $this->field_name;
 		$settings['value'] = $data;
 		$settings['required'] = $this->settings['field_required'] === 'y';
+		$settings['isGrid'] = isset($this->settings['grid_field_id']);
 
 		return ee()->load->view('number', $settings, true);
 	}

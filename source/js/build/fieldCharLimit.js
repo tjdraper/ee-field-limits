@@ -21,6 +21,8 @@
 						$cell.find('.js-field-limits-limited').each(function() {
 							scope.setLimits($(this));
 						});
+
+						scope.setGridRequired($cell);
 					});
 				});
 			}
@@ -57,6 +59,13 @@
 			});
 
 			$el.data('limits-set', true);
+		},
+		setGridRequired: function($cell) {
+			var $input = $cell.find('.js-field-limits-input');
+
+			if ($input.data('grid-required')) {
+				$input.attr('required', true);
+			}
 		}
 	});
 })(window.FAB);
