@@ -45,13 +45,13 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	 */
 	public function accepts_content_type($name)
 	{
-		return $name === 'channel' || $name === 'grid' || $name === 'blocks/1';
+		return $name === 'channel' or $name === 'grid' or $name === 'blocks/1';
 	}
 
 	/**
 	 * Settings
 	 *
-	 * @param string $data Existing setting data
+	 * @param array $data Existing setting data
 	 * @return array
 	 */
 	public function display_settings($data)
@@ -69,7 +69,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	/**
 	 * Display grid settings
 	 *
-	 * @param string $data Existing field data
+	 * @param array $data Existing setting data
 	 * @return array
 	 */
 	public function grid_display_settings($data)
@@ -89,12 +89,49 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	}
 
 	/**
+	 * Display Low Variables settings
+	 *
+	 * @param array $data Existing setting data
+	 * @return array
+	 */
+	public function display_var_settings($data)
+	{
+		ee()->lang->loadfile('field_limits');
+
+		$assets = new Helper\Assets();
+		$assets->add('settings');
+
+		$fields = new Helper\Fields($data, 'field_limits_input');
+
+		$settings = array();
+
+		$settings[] = $fields->lowVarsMaxLength();
+
+		$settings[] = $fields->lowVarsFieldFormatting();
+
+		return $settings;
+	}
+
+	/**
 	 * Save settings
 	 *
 	 * @param array $data
 	 * @return array
 	 */
 	public function save_settings($data)
+	{
+		$settingsArray = new Helper\SettingsArray();
+
+		return $settingsArray->get($data, 'field_limits_input');
+	}
+
+	/**
+	 * Save Low Variables settings
+	 *
+	 * @param array $data
+	 * @return array
+	 */
+	public function save_var_settings($data)
 	{
 		$settingsArray = new Helper\SettingsArray();
 
@@ -137,10 +174,24 @@ Class Field_limits_input_ft extends EE_Fieldtype
 
 		$settings['field_name'] = $this->field_name;
 		$settings['value'] = $data;
-		$settings['required'] = $this->settings['field_required'] === 'y';
+		$settings['required'] = isset($this->settings['field_required']) and
+			$this->settings['field_required'] === 'y';
 		$settings['isGrid'] = isset($this->settings['grid_field_id']);
 
 		return ee()->load->view('input', $settings, true);
+	}
+
+	/**
+	 * Display Low Variables field
+	 *
+	 * @param mixed $data
+	 * @return string
+	 */
+	public function display_var_field($data)
+	{
+		ee()->load->add_package_path(FIELD_LIMITS_PATH);
+
+		return $this->display_field($data);
 	}
 
 	/**
@@ -177,9 +228,30 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	}
 
 	/**
-	 * Replace tag pair
+	 * Validate Low Variables field
 	 *
-	 * @param string $fieldData The channel_data table data
+	 * @param string $data
+	 * @return mixed
+	 */
+	public function save_var_field($data)
+	{
+		ee()->lang->loadfile('field_limits');
+
+		$validation = $this->validate($data);
+
+		if ($validation !== true) {
+			$this->error_msg = $validation;
+
+			return false;
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Replace tag
+	 *
+	 * @param string $fieldData
 	 * @param array $tagParams
 	 * @return string
 	 */
@@ -194,5 +266,17 @@ Class Field_limits_input_ft extends EE_Fieldtype
 		);
 
 		return $tag->parse($fieldData, $tagParams, $settings);
+	}
+
+	/**
+	 * Display Low Variables tag
+	 *
+	 * @param string $fieldData
+	 * @param array $tagParams
+	 * @return string
+	 */
+	public function display_var_tag($fieldData, $tagParams = array())
+	{
+		return $this->replace_tag($fieldData, $tagParams);
 	}
 }

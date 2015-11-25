@@ -7,7 +7,7 @@ if (! defined('FIELD_LIMITS_AUTHOR')) {
 	define('FIELD_LIMITS_NAME', 'Field Limits');
 	define('FIELD_LIMITS_PATH', PATH_THIRD . 'field_limits/');
 	define('FIELD_LIMITS_THEMES', URL_THIRD_THEMES . 'field_limits/');
-	define('FIELD_LIMITS_VER', '1.0.0-b.2');
+	define('FIELD_LIMITS_VER', '1.0.0-b.3');
 }
 
 $config['name'] = FIELD_LIMITS_NAME;

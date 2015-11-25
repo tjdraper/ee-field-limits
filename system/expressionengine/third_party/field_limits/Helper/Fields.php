@@ -65,6 +65,25 @@ class Fields
 	}
 
 	/**
+	 * Add Low Variables max length settings field
+	 *
+	 * @return array
+	 */
+	public function lowVarsMaxLength()
+	{
+		return array(
+			lang('field_limits_max_length', 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_max_length]'),
+			form_input(array(
+				'id' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_max_length]',
+				'name' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_max_length]',
+				'type' => 'number',
+				'value' => isset($this->data['max_length']) ? $this->data['max_length'] : '',
+				'placeholder' => lang('field_limits_max_length')
+			))
+		);
+	}
+
+	/**
 	 * Add field formatting settings field
 	 */
 	public function fieldFormatting()
@@ -109,6 +128,29 @@ class Fields
 	}
 
 	/**
+	 * Add Low Variables field formatting settings field
+	 *
+	 * @return array
+	 */
+	public function lowVarsFieldFormatting()
+	{
+		return array(
+			lang('field_limits_format', 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_format]'),
+			form_dropdown(
+				'variable_settings[' . $this->prefix . '][' . $this->prefix .'_format]',
+				array(
+					'' => lang('field_limits_none'),
+					'all' => lang('field_limits_all'),
+					'xhtml' => lang('field_limits_xhtml'),
+					'br' => lang('field_limits_br') . ' &lt;br /&gt;',
+					'lite' => lang('field_limits_lite')
+				),
+				isset($this->data['format']) ? $this->data['format'] : ''
+			)
+		);
+	}
+
+	/**
 	 * Add field content settings field
 	 */
 	public function fieldContent()
@@ -144,6 +186,26 @@ class Fields
 				isset($this->data['content']) ? $this->data['content'] : ''
 			) .
 			'</div>';
+	}
+
+	/**
+	 * Add Low Variables content settings field
+	 *
+	 * @return array
+	 */
+	public function lowVarsFieldContent()
+	{
+		return array(
+			lang('field_limits_content', 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_content]'),
+			form_dropdown(
+				'variable_settings[' . $this->prefix . '][' . $this->prefix .'_content]',
+				array(
+					'num' => lang('field_limits_number'),
+					'int' => lang('field_limits_int'),
+				),
+				isset($this->data['content']) ? $this->data['content'] : ''
+			)
+		);
 	}
 
 	/**
@@ -183,6 +245,25 @@ class Fields
 	}
 
 	/**
+	 * Add Low Variables min number settings field
+	 *
+	 * @return array
+	 */
+	public function lowVarsMinNumber()
+	{
+		return array(
+			lang('field_limits_min', 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_min]'),
+			form_input(array(
+				'id' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_min]',
+				'name' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_min]',
+				'type' => 'number',
+				'value' => isset($this->data['min']) ? $this->data['min'] : '',
+				'placeholder' => lang('field_limits_min')
+			))
+		);
+	}
+
+	/**
 	 * Add max number settings field
 	 */
 	public function maxNumber()
@@ -216,6 +297,25 @@ class Fields
 				'placeholder' => lang('field_limits_max')
 			)) .
 			'</div>';
+	}
+
+	/**
+	 * Add Low Variables max number settings field
+	 *
+	 * @return array
+	 */
+	public function lowVarsMaxNumber()
+	{
+		return array(
+			lang('field_limits_max', 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_max]'),
+			form_input(array(
+				'id' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_max]',
+				'name' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_max]',
+				'type' => 'number',
+				'value' => isset($this->data['max']) ? $this->data['max'] : '',
+				'placeholder' => lang('field_limits_max')
+			))
+		);
 	}
 
 	/**
@@ -255,7 +355,26 @@ class Fields
 	}
 
 	/**
-	 * Add max length settings field
+	 * Add Low Variables step settings field
+	 *
+	 * @return array
+	 */
+	public function lowVarsStep()
+	{
+		return array(
+			lang('field_limits_step', 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_step]'),
+			form_input(array(
+				'id' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_step]',
+				'name' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_step]',
+				'type' => 'number',
+				'value' => isset($this->data['step']) ? $this->data['step'] : '',
+				'placeholder' => lang('field_limits_step')
+			))
+		);
+	}
+
+	/**
+	 * Add rows settings field
 	 */
 	public function rows()
 	{
@@ -272,7 +391,7 @@ class Fields
 	}
 
 	/**
-	 * Add grid max length settings field
+	 * Add grid rows settings field
 	 *
 	 * @return string
 	 */
@@ -288,5 +407,24 @@ class Fields
 			'placeholder' => lang('field_limits_rows')
 		)) .
 		'</div>';
+	}
+
+	/**
+	 * Add Low Variables row settings field
+	 *
+	 * @return array
+	 */
+	public function lowVarsRow()
+	{
+		return array(
+			lang('field_limits_rows', 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_rows]'),
+			form_input(array(
+				'id' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_rows',
+				'name' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_rows]',
+				'type' => 'number',
+				'value' => isset($this->data['rows']) ? $this->data['rows'] : '',
+				'placeholder' => lang('field_limits_rows')
+			))
+		);
 	}
 }
