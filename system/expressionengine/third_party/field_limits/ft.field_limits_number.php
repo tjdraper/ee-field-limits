@@ -168,6 +168,8 @@ Class Field_limits_number_ft extends EE_Fieldtype
 	 */
 	public function display_field($data)
 	{
+		$data = html_entity_decode($data);
+
 		$assets = new Helper\Assets();
 		$assets->add('field');
 
@@ -281,6 +283,8 @@ Class Field_limits_number_ft extends EE_Fieldtype
 	 */
 	public function replace_tag($fieldData, $tagParams = array())
 	{
+		$fieldData = html_entity_decode($fieldData);
+
 		$fieldSettings = new Helper\FieldSettings();
 		$tag = new Service\Tag();
 
