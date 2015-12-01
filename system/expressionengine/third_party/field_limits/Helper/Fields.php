@@ -34,10 +34,10 @@ class Fields
 	public function maxLength()
 	{
 		ee()->table->add_row(
-			lang('field_limits_max_length', $this->prefix . '_max_length'),
+			lang('field_limits_max_length', "{$this->prefix}_max_length"),
 			form_input(array(
-				'id' => $this->prefix . '_max_length',
-				'name' => $this->prefix . '_max_length',
+				'id' => "{$this->prefix}_max_length",
+				'name' => "{$this->prefix}_max_length",
 				'type' => 'number',
 				'value' => isset($this->data['max_length']) ? $this->data['max_length'] : '',
 				'placeholder' => lang('field_limits_max_length')
@@ -52,11 +52,11 @@ class Fields
 	 */
 	public function gridMaxLength()
 	{
-		return lang('field_limits_max_length', 'grid_' . $this->prefix . '_max_length') .
+		return lang('field_limits_max_length', "grid_{$this->prefix}_max_length") .
 			'<div class="grid-input">' .
 			form_input(array(
-				'id' => 'grid_' . $this->prefix . '_max_length',
-				'name' => $this->prefix . '_max_length',
+				'id' => "grid_{$this->prefix}_max_length",
+				'name' => "{$this->prefix}_max_length",
 				'type' => 'number',
 				'value' => isset($this->data['max_length']) ? $this->data['max_length'] : '',
 				'placeholder' => lang('field_limits_max_length')
@@ -72,10 +72,10 @@ class Fields
 	public function lowVarsMaxLength()
 	{
 		return array(
-			lang('field_limits_max_length', 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_max_length]'),
+			lang('field_limits_max_length', "variable_settings[{$this->prefix}][{$this->prefix}_max_length]"),
 			form_input(array(
-				'id' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_max_length]',
-				'name' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_max_length]',
+				'id' => "variable_settings[{$this->prefix}][{$this->prefix}_max_length]",
+				'name' => "variable_settings[{$this->prefix}][{$this->prefix}_max_length]",
 				'type' => 'number',
 				'value' => isset($this->data['max_length']) ? $this->data['max_length'] : '',
 				'placeholder' => lang('field_limits_max_length')
@@ -89,9 +89,9 @@ class Fields
 	public function fieldFormatting()
 	{
 		ee()->table->add_row(
-			lang('field_limits_format', $this->prefix . '_format'),
+			lang('field_limits_format', "{$this->prefix}_format"),
 			form_dropdown(
-				$this->prefix . '_format',
+				"{$this->prefix}_format",
 				array(
 					'' => lang('field_limits_none'),
 					'all' => lang('field_limits_all'),
@@ -111,10 +111,10 @@ class Fields
 	 */
 	public function gridFieldFormatting()
 	{
-		return lang('field_limits_format', 'grid_' . $this->prefix . '_format') .
+		return lang('field_limits_format', "grid_{$this->prefix}_format") .
 			'<div class="grid-input">' .
 			form_dropdown(
-				$this->prefix . '_format',
+				"{$this->prefix}_format",
 				array(
 					'' => lang('field_limits_none'),
 					'all' => lang('field_limits_all'),
@@ -135,9 +135,9 @@ class Fields
 	public function lowVarsFieldFormatting()
 	{
 		return array(
-			lang('field_limits_format', 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_format]'),
+			lang('field_limits_format', "variable_settings[{$this->prefix}][{$this->prefix}_format]"),
 			form_dropdown(
-				'variable_settings[' . $this->prefix . '][' . $this->prefix .'_format]',
+				"variable_settings[{$this->prefix}][{$this->prefix}_format]",
 				array(
 					'' => lang('field_limits_none'),
 					'all' => lang('field_limits_all'),
@@ -156,9 +156,9 @@ class Fields
 	public function fieldContent()
 	{
 		ee()->table->add_row(
-			lang('field_limits_content', $this->prefix . '_content'),
+			lang('field_limits_content', "{$this->prefix}_content"),
 			form_dropdown(
-				$this->prefix . '_content',
+				"{$this->prefix}_content",
 				array(
 					'num' => lang('field_limits_number'),
 					'int' => lang('field_limits_int'),
@@ -175,10 +175,10 @@ class Fields
 	 */
 	public function gridFieldContent()
 	{
-		return lang('field_limits_content', 'grid_' . $this->prefix . '_content') .
+		return lang('field_limits_content', "grid_{$this->prefix}_content") .
 			'<div class="grid-input">' .
 			form_dropdown(
-				$this->prefix . '_content',
+				"{$this->prefix}_content",
 				array(
 					'num' => lang('field_limits_number'),
 					'int' => lang('field_limits_int'),
@@ -196,9 +196,9 @@ class Fields
 	public function lowVarsFieldContent()
 	{
 		return array(
-			lang('field_limits_content', 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_content]'),
+			lang('field_limits_content', "variable_settings[{$this->prefix}][{$this->prefix}_content]"),
 			form_dropdown(
-				'variable_settings[' . $this->prefix . '][' . $this->prefix .'_content]',
+				"variable_settings[{$this->prefix}][{$this->prefix}_content]",
 				array(
 					'num' => lang('field_limits_number'),
 					'int' => lang('field_limits_int'),
@@ -214,10 +214,10 @@ class Fields
 	public function minNumber()
 	{
 		ee()->table->add_row(
-			lang('field_limits_min', $this->prefix . '_min'),
+			lang('field_limits_min', "{$this->prefix}_min"),
 			form_input(array(
-				'id' => $this->prefix . '_min',
-				'name' => $this->prefix . '_min',
+				'id' => "{$this->prefix}_min",
+				'name' => "{$this->prefix}_min",
 				'type' => 'number',
 				'value' => isset($this->data['min']) ? $this->data['min'] : '',
 				'placeholder' => lang('field_limits_min')
@@ -232,11 +232,11 @@ class Fields
 	 */
 	public function gridMinNumber()
 	{
-		return lang('field_limits_min', 'grid_' . $this->prefix . '_min') .
+		return lang('field_limits_min', "grid_{$this->prefix}_min") .
 		'<div class="grid-input">' .
 			form_input(array(
-				'id' => 'grid_' . $this->prefix . '_min',
-				'name' => $this->prefix . '_min',
+				'id' => "grid_{$this->prefix}_min",
+				'name' => "{$this->prefix}_min",
 				'type' => 'number',
 				'value' => isset($this->data['min']) ? $this->data['min'] : '',
 				'placeholder' => lang('field_limits_min')
@@ -252,10 +252,10 @@ class Fields
 	public function lowVarsMinNumber()
 	{
 		return array(
-			lang('field_limits_min', 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_min]'),
+			lang('field_limits_min', "variable_settings[{$this->prefix}][{$this->prefix}_min]"),
 			form_input(array(
-				'id' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_min]',
-				'name' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_min]',
+				'id' => "variable_settings[{$this->prefix}][{$this->prefix}_min]",
+				'name' => "variable_settings[{$this->prefix}][{$this->prefix}_min]",
 				'type' => 'number',
 				'value' => isset($this->data['min']) ? $this->data['min'] : '',
 				'placeholder' => lang('field_limits_min')
@@ -269,10 +269,10 @@ class Fields
 	public function maxNumber()
 	{
 		ee()->table->add_row(
-			lang('field_limits_max', $this->prefix . '_max'),
+			lang('field_limits_max', "{$this->prefix}_max"),
 			form_input(array(
-				'id' => $this->prefix . '_max',
-				'name' => $this->prefix . '_max',
+				'id' => "{$this->prefix}_max",
+				'name' => "{$this->prefix}_max",
 				'type' => 'number',
 				'value' => isset($this->data['max']) ? $this->data['max'] : '',
 				'placeholder' => lang('field_limits_max')
@@ -287,11 +287,11 @@ class Fields
 	 */
 	public function gridMaxNumber()
 	{
-		return lang('field_limits_max', 'grid_' . $this->prefix . '_max') .
+		return lang('field_limits_max', "grid_{$this->prefix}_max") .
 			'<div class="grid-input">' .
 			form_input(array(
-				'id' => 'grid_' . $this->prefix . '_max',
-				'name' => $this->prefix . '_max',
+				'id' => "grid_{$this->prefix}_max",
+				'name' => "{$this->prefix}_max",
 				'type' => 'number',
 				'value' => isset($this->data['max']) ? $this->data['max'] : '',
 				'placeholder' => lang('field_limits_max')
@@ -307,10 +307,10 @@ class Fields
 	public function lowVarsMaxNumber()
 	{
 		return array(
-			lang('field_limits_max', 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_max]'),
+			lang('field_limits_max', "variable_settings[{$this->prefix}][{$this->prefix}_max]"),
 			form_input(array(
-				'id' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_max]',
-				'name' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_max]',
+				'id' => "variable_settings[{$this->prefix}][{$this->prefix}_max]",
+				'name' => "variable_settings[{$this->prefix}][{$this->prefix}_max]",
 				'type' => 'number',
 				'value' => isset($this->data['max']) ? $this->data['max'] : '',
 				'placeholder' => lang('field_limits_max')
@@ -324,10 +324,10 @@ class Fields
 	public function step()
 	{
 		ee()->table->add_row(
-			lang('field_limits_step', $this->prefix . '_step'),
+			lang('field_limits_step', "{$this->prefix}_step"),
 			form_input(array(
-				'id' => $this->prefix . '_step',
-				'name' => $this->prefix . '_step',
+				'id' => "{$this->prefix}_step",
+				'name' => "{$this->prefix}_step",
 				'type' => 'number',
 				'value' => isset($this->data['step']) ? $this->data['step'] : '',
 				'placeholder' => lang('field_limits_step')
@@ -342,11 +342,11 @@ class Fields
 	 */
 	public function gridStep()
 	{
-		return lang('field_limits_step', 'grid_' . $this->prefix . '_step') .
+		return lang('field_limits_step', "grid_{$this->prefix}_step") .
 			'<div class="grid-input">' .
 			form_input(array(
-				'id' => 'grid_' . $this->prefix . '_step',
-				'name' => $this->prefix . '_step',
+				'id' => "grid_{$this->prefix}_step",
+				'name' => "{$this->prefix}_step",
 				'type' => 'number',
 				'value' => isset($this->data['step']) ? $this->data['step'] : '',
 				'placeholder' => lang('field_limits_step')
@@ -362,10 +362,10 @@ class Fields
 	public function lowVarsStep()
 	{
 		return array(
-			lang('field_limits_step', 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_step]'),
+			lang('field_limits_step', "variable_settings[{$this->prefix}][{$this->prefix}_step]"),
 			form_input(array(
-				'id' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_step]',
-				'name' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_step]',
+				'id' => "variable_settings[{$this->prefix}][{$this->prefix}_step]",
+				'name' => "variable_settings[{$this->prefix}][{$this->prefix}_step]",
 				'type' => 'number',
 				'value' => isset($this->data['step']) ? $this->data['step'] : '',
 				'placeholder' => lang('field_limits_step')
@@ -379,10 +379,10 @@ class Fields
 	public function rows()
 	{
 		ee()->table->add_row(
-			lang('field_limits_rows', $this->prefix . '_rows'),
+			lang('field_limits_rows', "{$this->prefix}_rows"),
 			form_input(array(
-				'id' => $this->prefix . '_rows',
-				'name' => $this->prefix . '_rows',
+				'id' => "{$this->prefix}_rows",
+				'name' => "{$this->prefix}_rows",
 				'type' => 'number',
 				'value' => isset($this->data['rows']) ? $this->data['rows'] : '',
 				'placeholder' => lang('field_limits_rows')
@@ -397,11 +397,11 @@ class Fields
 	 */
 	public function gridRows()
 	{
-		return lang('field_limits_rows', 'grid_' . $this->prefix . '_rows') .
+		return lang('field_limits_rows', "grid_{$this->prefix}_rows") .
 		'<div class="grid-input">' .
 		form_input(array(
-			'id' => 'grid_' . $this->prefix . '_rows',
-			'name' => $this->prefix . '_rows',
+			'id' => "grid_{$this->prefix}_rows",
+			'name' => "{$this->prefix}_rows",
 			'type' => 'number',
 			'value' => isset($this->data['rows']) ? $this->data['rows'] : '',
 			'placeholder' => lang('field_limits_rows')
@@ -417,10 +417,10 @@ class Fields
 	public function lowVarsRow()
 	{
 		return array(
-			lang('field_limits_rows', 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_rows]'),
+			lang('field_limits_rows', "variable_settings[{$this->prefix}][{$this->prefix}_rows]"),
 			form_input(array(
-				'id' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_rows',
-				'name' => 'variable_settings[' . $this->prefix . '][' . $this->prefix .'_rows]',
+				'id' => "variable_settings[{$this->prefix}][{$this->prefix}_rows",
+				'name' => "variable_settings[{$this->prefix}][{$this->prefix}_rows]",
 				'type' => 'number',
 				'value' => isset($this->data['rows']) ? $this->data['rows'] : '',
 				'placeholder' => lang('field_limits_rows')
