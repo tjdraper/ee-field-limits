@@ -16,20 +16,20 @@
 		value="<?= $value ?>"
 		class="field-limits-field__input js-field-limits-input"
 		<?php if ($min) { ?>
-		min="<?= $min ?>"
+			min="<?= $min ?>"
 		<?php } ?>
 		<?php if ($max) { ?>
-		max="<?= $max ?>"
+			max="<?= $max ?>"
 		<?php } ?>
 		<?php if ($content === 'num') { ?>
-		step="any"
+			step="any"
 		<?php } elseif ($step) { ?>
-		step="<?= $step ?>"
+			step="<?= $step ?>"
 		<?php } ?>
-		<?php if (! $isGrid and $required) { ?>
-		required
+		<?php if ($isGrid and $required) { ?>
+			data-grid-required="true"
 		<?php } elseif ($required) { ?>
-		data-grid-required="true"
+			required
 		<?php } ?>
 	>
 </div>

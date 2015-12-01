@@ -17,13 +17,13 @@
 		name="<?= $field_name ?>"
 		value="<?= htmlentities($value) ?>"
 		<?php if ($max_length) { ?>
-		maxlength="<?= $max_length ?>"
+			maxlength="<?= $max_length ?>"
 		<?php } ?>
-		class="field-limits-field__input js-field-limits-input"
-		<?php if (! $isGrid and $required) { ?>
-		required
+			class="field-limits-field__input js-field-limits-input"
+		<?php if ($isGrid and $required) { ?>
+			data-grid-required="true"
 		<?php } elseif ($required) { ?>
-		data-grid-required="true"
+			required
 		<?php } ?>
 	>
 	<?php if ($max_length) { ?>
