@@ -14,7 +14,7 @@
 		type="number"
 		name="<?= $field_name ?>"
 		value="<?= $value ?>"
-		class="field-limits-field__input js-field-limits-input"
+		class="field-limits-field__input<?php if (! $isGrid) { ?> --standard<?php } ?> js-field-limits-input"
 		<?php if ($min) { ?>
 			min="<?= $min ?>"
 		<?php } ?>
