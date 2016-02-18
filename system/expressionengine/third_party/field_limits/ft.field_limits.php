@@ -15,7 +15,7 @@ include_once(PATH_THIRD . 'field_limits/addon.setup.php');
 use FieldLimits\Helper;
 use FieldLimits\Service;
 
-Class Field_limits_input_ft extends EE_Fieldtype
+Class Field_limits_ft extends EE_Fieldtype
 {
 	// Set EE fieldtype info
 	public $info = array(
@@ -59,7 +59,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 		$assets = new Helper\Assets();
 		$assets->add('settings');
 
-		$fields = new Helper\Fields($data, 'field_limits_input');
+		$fields = new Helper\Fields($data, 'field_limits');
 
 		$fields->maxLength();
 
@@ -77,7 +77,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 		$assets = new Helper\Assets();
 		$assets->add('settings');
 
-		$fields = new Helper\Fields($data, 'field_limits_input');
+		$fields = new Helper\Fields($data, 'field_limits');
 
 		$settings = array();
 
@@ -101,7 +101,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 		$assets = new Helper\Assets();
 		$assets->add('settings');
 
-		$fields = new Helper\Fields($data, 'field_limits_input');
+		$fields = new Helper\Fields($data, 'field_limits');
 
 		$settings = array();
 
@@ -122,7 +122,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	{
 		$settingsArray = new Helper\SettingsArray();
 
-		return $settingsArray->get($data, 'field_limits_input');
+		return $settingsArray->get($data, 'field_limits');
 	}
 
 	/**
@@ -135,7 +135,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	{
 		$settingsArray = new Helper\SettingsArray();
 
-		return $settingsArray->get($data, 'field_limits_input');
+		return $settingsArray->get($data, 'field_limits');
 	}
 
 	/**
@@ -164,7 +164,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 
 		ee()->javascript->output(
 			'fieldLimits.vars.fieldTypeNames = fieldLimits.vars.fieldTypeNames || [];' .
-			'fieldLimits.vars.fieldTypeNames.push("field_limits_input");'
+			'fieldLimits.vars.fieldTypeNames.push("field_limits");'
 		);
 
 		$fieldSettings = new Helper\FieldSettings();
