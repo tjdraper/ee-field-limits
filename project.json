@@ -1,5 +1,5 @@
 {
-	"addOnDir": "system/expressionengine/third_party/field_limits",
+	"addOnDir": "system/user/addons/field_limits",
 	"cssDir": "css",
 	"jsDir": "javascript",
 	"cssFile": "fieldLimits.min.css",
