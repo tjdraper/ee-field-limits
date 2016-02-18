@@ -1,6 +1,6 @@
 <?php
 
-defined('FIELD_LIMITS_VER') || define('FIELD_LIMITS_VER', '1.0.0-b.7');
+defined('FIELD_LIMITS_VER') || define('FIELD_LIMITS_VER', '1.0.0');
 
 // Set up autoloading
 spl_autoload_register(function ($class) {
