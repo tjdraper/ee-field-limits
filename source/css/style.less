@@ -11,38 +11,16 @@
 
 
 /*------------------------------------*\
-	# Settings
+	# EE Fixes
 \*------------------------------------*/
 
-.grid_col_settings_custom {
-	.grid-input {
-		.margin(top; 4px);
-	}
+input[type="number"] {
+	.fill();
+	.spaced(10px);
 }
-.grid_col_settings_section input[type=number] {
-	.border(#c8cfd8);
-	.padding(6px);
-	.rounded(0);
-	&:focus {
-		.border(#a49745);
-	}
-}
-
-
-
-
-
-/*------------------------------------*\
-	# Fix EE styling of inputs in Grid
-\*------------------------------------*/
-
-.grid_field input[type=number] {
-	.border(#c8cfd8);
-	.rounded(0);
-	.padding(6px);
-	&:focus {
-		.background-color(#fbfaed);
-		.border(#a49745);
+.setting-txt {
+	em {
+		.font-weight(normal);
 	}
 }
 
@@ -55,20 +33,24 @@
 \*------------------------------------*/
 
 .field-limits-count {
-	.font-size(10px);
-	.margin(8px; false; 8px; 2px);
-	&.\--warning {
+	.font-size(11px);
+	.margin(false; false; 10px; 2px);
+	&--grid {
+		.spaced(0);
+	}
+	&--warning {
 		.bold();
 		.color(#b49502);
 	}
-	&.\--limit-reached {
+	&--limit-reached {
 		.color(#b41302);
 	}
 }
 .field-limits-field {
 	&__input {
-		&.\--standard {
-			.margin(top; 10px);
+		.min-height(auto);
+		&--grid {
+			.margin(bottom; 10px) !important;
 		}
 	}
 }

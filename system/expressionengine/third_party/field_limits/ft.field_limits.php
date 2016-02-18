@@ -15,7 +15,7 @@ include_once(PATH_THIRD . 'field_limits/addon.setup.php');
 use FieldLimits\Helper;
 use FieldLimits\Service;
 
-Class Field_limits_input_ft extends EE_Fieldtype
+Class Field_limits_ft extends EE_Fieldtype
 {
 	// Set EE fieldtype info
 	public $info = array(
@@ -28,7 +28,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 		// Make sure Field Limits is really being requested
 		if (
 			ee()->uri->segment(1) === 'cp' &&
-			in_array(FIELD_LIMITS_PATH, ee()->config->_config_paths)
+			in_array(PATH_THIRD . 'field_limits/', ee()->config->_config_paths)
 		) {
 			ee()->lang->loadfile('field_limits');
 		}
@@ -38,14 +38,14 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	}
 
 	/**
-	 * Enable Blocks and Grid options
+	 * Specify compatibility
 	 *
 	 * @param string $name
 	 * @return bool
 	 */
 	public function accepts_content_type($name)
 	{
-		return $name === 'channel' or $name === 'grid' or $name === 'blocks/1';
+		return $name === 'channel' or $name === 'grid';
 	}
 
 	/**
@@ -59,11 +59,16 @@ Class Field_limits_input_ft extends EE_Fieldtype
 		$assets = new Helper\Assets();
 		$assets->add('settings');
 
-		$fields = new Helper\Fields($data, 'field_limits_input');
+		$fields = new Helper\Fields($data, 'field_limits');
 
-		$fields->maxLength();
-
-		$fields->fieldFormatting();
+		return array('field_options_field_limits' => array(
+			'label' => 'field_options',
+			'group' => 'field_limits',
+			'settings' => array(
+				$fields->maxLength(),
+				$fields->fieldFormatting()
+			)
+		));
 	}
 
 	/**
@@ -77,15 +82,14 @@ Class Field_limits_input_ft extends EE_Fieldtype
 		$assets = new Helper\Assets();
 		$assets->add('settings');
 
-		$fields = new Helper\Fields($data, 'field_limits_input');
+		$fields = new Helper\Fields($data, 'field_limits');
 
-		$settings = array();
-
-		$settings[] = $fields->gridMaxLength();
-
-		$settings[] = $fields->gridFieldFormatting();
-
-		return $settings;
+		return array(
+			'field_options' => array(
+				$fields->maxLength(),
+				$fields->fieldFormatting()
+			)
+		);
 	}
 
 	/**
@@ -94,22 +98,19 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	 * @param array $data Existing setting data
 	 * @return array
 	 */
-	public function display_var_settings($data)
+	public function var_display_settings($data)
 	{
 		ee()->lang->loadfile('field_limits');
 
 		$assets = new Helper\Assets();
 		$assets->add('settings');
 
-		$fields = new Helper\Fields($data, 'field_limits_input');
+		$fields = new Helper\Fields($data, 'field_limits');
 
-		$settings = array();
-
-		$settings[] = $fields->lowVarsMaxLength();
-
-		$settings[] = $fields->lowVarsFieldFormatting();
-
-		return $settings;
+		return array(
+			$fields->lowVarsMaxLength(),
+			$fields->lowVarsFieldFormatting()
+		);
 	}
 
 	/**
@@ -122,7 +123,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	{
 		$settingsArray = new Helper\SettingsArray();
 
-		return $settingsArray->get($data, 'field_limits_input');
+		return $settingsArray->get($data, 'field_limits');
 	}
 
 	/**
@@ -131,11 +132,11 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	 * @param array $data
 	 * @return array
 	 */
-	public function save_var_settings($data)
+	public function var_save_settings($data)
 	{
 		$settingsArray = new Helper\SettingsArray();
 
-		return $settingsArray->get($data, 'field_limits_input');
+		return $settingsArray->get($data, 'field_limits');
 	}
 
 	/**
@@ -164,7 +165,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 
 		ee()->javascript->output(
 			'fieldLimits.vars.fieldTypeNames = fieldLimits.vars.fieldTypeNames || [];' .
-			'fieldLimits.vars.fieldTypeNames.push("field_limits_input");'
+			'fieldLimits.vars.fieldTypeNames.push("field_limits");'
 		);
 
 		$fieldSettings = new Helper\FieldSettings();
@@ -189,9 +190,9 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	 * @param mixed $data
 	 * @return string
 	 */
-	public function display_var_field($data)
+	public function var_display_field($data)
 	{
-		ee()->load->add_package_path(FIELD_LIMITS_PATH);
+		ee()->load->add_package_path(PATH_THIRD . 'field_limits/');
 
 		return $this->display_field($data);
 	}
@@ -235,7 +236,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	 * @param string $data
 	 * @return mixed
 	 */
-	public function save_var_field($data)
+	public function var_save($data)
 	{
 		ee()->lang->loadfile('field_limits');
 
@@ -257,7 +258,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	 * @param array $tagParams
 	 * @return string
 	 */
-	public function replace_tag($fieldData, $tagParams = array())
+	public function replace_tag($fieldData, $tagParams = array(), $tagData = false)
 	{
 		$fieldData = html_entity_decode($fieldData);
 
@@ -279,7 +280,7 @@ Class Field_limits_input_ft extends EE_Fieldtype
 	 * @param array $tagParams
 	 * @return string
 	 */
-	public function display_var_tag($fieldData, $tagParams = array())
+	public function var_replace_tag($fieldData, $tagParams = array(), $tagData = false)
 	{
 		return $this->replace_tag($fieldData, $tagParams);
 	}

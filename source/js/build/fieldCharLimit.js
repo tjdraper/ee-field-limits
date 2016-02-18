@@ -46,15 +46,15 @@
 				$counter.text($input.val().length);
 
 				if ($input.val().length >= warningLevel) {
-					$countWrapper.addClass('--warning');
+					$countWrapper.addClass('field-limits-count--warning');
 				} else {
-					$countWrapper.removeClass('--warning');
+					$countWrapper.removeClass('field-limits-count--warning');
 				}
 
 				if ($input.val().length >= limit) {
-					$countWrapper.addClass('--limit-reached');
+					$countWrapper.addClass('field-limits-count--limit-reached');
 				} else {
-					$countWrapper.removeClass('--limit-reached');
+					$countWrapper.removeClass('field-limits-count--limit-reached');
 				}
 			});
 

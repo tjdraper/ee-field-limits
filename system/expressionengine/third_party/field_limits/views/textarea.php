@@ -19,7 +19,7 @@
 		<?php if ($max_length) { ?>
 			maxlength="<?= $max_length ?>"
 		<?php } ?>
-		class="field-limits-field__input<?php if (! $isGrid) { ?> --standard<?php } ?> js-field-limits-input"
+		class="field-limits-field__input<?php if ($isGrid) { ?> field-limits-field__input--grid<?php } ?> js-field-limits-input"
 		<?php if ($isGrid and $required) { ?>
 			data-grid-required="true"
 		<?php } elseif ($required) { ?>
