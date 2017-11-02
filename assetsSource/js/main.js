@@ -19,6 +19,22 @@ function runMain(F) {
 		'field_limits_textarea'
 	];
 
+	function contextActivator($context) {
+		$context.find('.js-field-limits-limited').each(function() {
+			var $el = $(this);
+
+			if ($el.data('fieldLimitsLimitSet')) {
+				return;
+			}
+
+			$el.data('fieldLimitsLimitSet', true);
+
+			F.controller.construct('FieldCharLimit', {
+				el: this
+			});
+		});
+	}
+
 	// Stop number scroll wheel
 	$('body').on('mousewheel', ':input[type=number]', function() {
 		this.blur();
@@ -35,21 +51,8 @@ function runMain(F) {
 	});
 
 	fields.forEach(function(i) {
-		window.Grid.bind(i, 'display', function($cell) {
-			$cell.find('.js-field-limits-limited').each(function() {
-				var $el = $(this);
-
-				if ($el.data('fieldLimitsLimitSet')) {
-					return;
-				}
-
-				$el.data('fieldLimitsLimitSet', true);
-
-				F.controller.construct('FieldCharLimit', {
-					el: this
-				});
-			});
-		});
+		window.Grid.bind(i, 'display', contextActivator);
+		window.FluidField.on(i, 'add', contextActivator);
 	});
 }
 

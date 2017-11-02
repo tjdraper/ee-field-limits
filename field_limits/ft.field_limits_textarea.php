@@ -50,7 +50,15 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 	 */
 	public function accepts_content_type($name)
 	{
-		return $name === 'channel' or $name === 'grid';
+		$compatibility = array(
+			'blocks/1',
+			'channel',
+			'fluid_field',
+			'grid',
+			'low_variables',
+		);
+
+		return in_array($name, $compatibility, false);
 	}
 
 	/**
