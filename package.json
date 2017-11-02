@@ -1,0 +1,27 @@
+{
+    "scripts": {
+        "fab": "node fab.js"
+    },
+    "name": "my-project",
+    "version": "1.0.0",
+    "description": "my-description",
+    "homepage": "https://site.com",
+    "bugs": "https://site.com/issues",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/user/repo.git"
+    },
+    "license": "Apache-2.0",
+    "author": "BuzzingPixel, LLC",
+    "contributors": [
+        {
+            "name": "TJ Draper",
+            "url": "https://buzzingpixel.com"
+        }
+    ],
+    "dependencies": {
+        "fab-build-next": "^1.0.1",
+        "fab.controller": "^1.2.1",
+        "fab.model": "^1.2.1"
+    }
+}

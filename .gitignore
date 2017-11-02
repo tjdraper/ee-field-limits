@@ -2,6 +2,7 @@
 	# Project
 #------------------------------------
 
+/projectOverrides.json
 /auth.json
 /libraries/ExpressionEngine/system/user/cache/*
 /libraries/ExpressionEngine/system/user/config/license.key
@@ -17,6 +18,7 @@
 	# Tools
 #------------------------------------
 
+/fabCache/*
 configLocal.json
 localStorage/*
 !localStorage/dbBackups
