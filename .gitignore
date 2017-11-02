@@ -3,6 +3,11 @@
 #------------------------------------
 
 /auth.json
+/libraries/ExpressionEngine/system/user/cache/*
+/libraries/ExpressionEngine/system/user/config/license.key
+/libraries/ExpressionEngine/system/user/addons/*
+/libraries/ExpressionEngine/themes/user/*
+/libraries/ExpressionEngine/system/user/templates/*
 
 
 
@@ -16,7 +21,6 @@ configLocal.json
 localStorage/*
 !localStorage/dbBackups
 localStorage/dbBackups/*
-libraries/ExpressionEngine/system/user/cache/*
 bower_components/
 node_modules/
 out/
