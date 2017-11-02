@@ -1,0 +1,18 @@
+{
+    "require": {
+        "roave/security-advisories": "dev-master",
+        "tjdraper/expressionengine": "dev-version-4"
+    },
+    "autoload": {
+        "psr-0": {
+            "stats": "",
+            "EllisLab\\" : "libraries/ExpressionEngine/system/ee/EllisLab/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:tjdraper/expressionengine.git"
+        }
+    ]
+}
