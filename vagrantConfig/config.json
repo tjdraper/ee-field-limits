@@ -17,6 +17,11 @@
         },
         {
             "relative": true,
+            "map": "/field_limits_themes",
+            "to": "/home/vagrant/development/libraries/ExpressionEngine/themes/user/field_limits/"
+        },
+        {
+            "relative": true,
             "map": "/vendor/tjdraper/expressionengine/src/system/ee",
             "to": "/home/vagrant/development/libraries/ExpressionEngine/system/ee/"
         },
