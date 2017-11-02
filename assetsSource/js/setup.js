@@ -8,7 +8,6 @@ window[window.FABNAMESPACE].fieldLimitsDependenciesReady = function() {
 	var F = window[window.FABNAMESPACE];
 
 	return window.Grid !== undefined &&
-		window.FluidField !== undefined &&
 		window.$ !== undefined &&
 		F.controller !== undefined &&
 		F.model !== undefined;

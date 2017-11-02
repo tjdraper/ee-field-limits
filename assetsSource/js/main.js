@@ -52,7 +52,10 @@ function runMain(F) {
 
 	fields.forEach(function(i) {
 		window.Grid.bind(i, 'display', contextActivator);
-		window.FluidField.on(i, 'add', contextActivator);
+
+		if (window.FluidField !== undefined) {
+			window.FluidField.on(i, 'add', contextActivator);
+		}
 	});
 }
 
