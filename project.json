@@ -1,3 +1,4 @@
 {
-	"assets": "field_limits_themes"
+	"assets": "field_limits_themes",
+	"jsNamespace": "FIELDLIMITS"
 }

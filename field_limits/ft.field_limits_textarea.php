@@ -61,7 +61,7 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 	public function display_settings($data)
 	{
 		$assets = new Helper\Assets();
-		$assets->add('settings');
+		$assets->add();
 
 		$fields = new Helper\Fields($data, 'field_limits_textarea');
 
@@ -84,7 +84,7 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 	public function grid_display_settings($data)
 	{
 		$assets = new Helper\Assets();
-		$assets->add('settings');
+		$assets->add();
 
 		$fields = new Helper\Fields($data, 'field_limits_textarea');
 
@@ -107,7 +107,7 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 		ee()->lang->loadfile('field_limits');
 
 		$assets = new Helper\Assets();
-		$assets->add('settings');
+		$assets->add();
 
 		$fields = new Helper\Fields($data, 'field_limits_textarea');
 
@@ -161,15 +161,10 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 		$data = html_entity_decode($data);
 
 		$assets = new Helper\Assets();
-		$assets->add('field');
+		$assets->add();
 
 		$data = str_replace("&#039;", "'", $data);
 		$data = str_replace('&quot;', '"', $data);
-
-		ee()->javascript->output(
-			'fieldLimits.vars.fieldTypeNames = fieldLimits.vars.fieldTypeNames || [];' .
-			'fieldLimits.vars.fieldTypeNames.push("field_limits_textarea");'
-		);
 
 		$fieldSettings = new Helper\FieldSettings();
 
