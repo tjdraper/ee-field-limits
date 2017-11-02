@@ -1,6 +1,5 @@
 {
 	"disallowEmptyBlocks": true,
-	"disallowFunctionDeclarations": true,
 	"disallowImplicitTypeConversion": [
 		"binary",
 		"boolean",
@@ -67,7 +66,6 @@
 	"requireDollarBeforejQueryAssignment": true,
 	"requireDotNotation": true,
 	"requireLineBreakAfterVariableAssignment": true,
-	"requireMultipleVarDecl": true,
 	"requireOperatorBeforeLineBreak": true,
 	"requirePaddingNewlinesBeforeKeywords": [
 		"do",
