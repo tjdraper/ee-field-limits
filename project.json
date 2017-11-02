@@ -1,5 +1,5 @@
 {
-	"addOnDir": "system/user/addons/field_limits",
+	"addOnDir": "field_limits",
 	"cssDir": "css",
 	"jsDir": "javascript",
 	"cssFile": "fieldLimits.min.css",
