@@ -1,7 +1,4 @@
-<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
-
-// Include configuration
-include_once(PATH_THIRD . 'field_limits/addon.setup.php');
+<?php
 
 /**
  * Field Limits number field type
@@ -15,20 +12,29 @@ include_once(PATH_THIRD . 'field_limits/addon.setup.php');
 use FieldLimits\Helper;
 use FieldLimits\Service;
 
+/**
+ * Class Field_limits_number_ft
+ */
 Class Field_limits_number_ft extends EE_Fieldtype
 {
-	// Set EE fieldtype info
+	/** @var array $info */
 	public $info = array(
 		'name' => 'Field Limits - Number',
 		'version' => FIELD_LIMITS_VER
 	);
 
+	/**
+	 * Field_limits_number_ft constructor.
+	 */
 	public function __construct()
 	{
 		// Make sure Field Limits is really being requested
-		if (
-			ee()->uri->segment(1) === 'cp' &&
-			in_array(PATH_THIRD . 'field_limits/', ee()->config->_config_paths)
+		if (ee()->uri->segment(1) === 'cp' &&
+			in_array(
+				PATH_THIRD . 'field_limits/',
+				ee()->config->_config_paths,
+				true
+			)
 		) {
 			ee()->lang->loadfile('field_limits');
 		}
@@ -39,7 +45,6 @@ Class Field_limits_number_ft extends EE_Fieldtype
 
 	/**
 	 * Specify compatibility
-	 *
 	 * @param string $name
 	 * @return bool
 	 */
@@ -50,8 +55,7 @@ Class Field_limits_number_ft extends EE_Fieldtype
 
 	/**
 	 * Settings
-	 *
-	 * @param string $data Existing setting data
+	 * @param mixed $data Existing setting data
 	 * @return array
 	 */
 	public function display_settings($data)
@@ -75,8 +79,7 @@ Class Field_limits_number_ft extends EE_Fieldtype
 
 	/**
 	 * Display grid settings
-	 *
-	 * @param string $data Existing field data
+	 * @param mixed $data Existing field data
 	 * @return array
 	 */
 	public function grid_display_settings($data)
@@ -98,7 +101,6 @@ Class Field_limits_number_ft extends EE_Fieldtype
 
 	/**
 	 * Display Low Variables settings
-	 *
 	 * @param array $data Existing setting data
 	 * @return array
 	 */
@@ -121,7 +123,6 @@ Class Field_limits_number_ft extends EE_Fieldtype
 
 	/**
 	 * Save settings
-	 *
 	 * @param array $data
 	 * @return array
 	 */
@@ -134,7 +135,6 @@ Class Field_limits_number_ft extends EE_Fieldtype
 
 	/**
 	 * Save Low Variables settings
-	 *
 	 * @param array $data
 	 * @return array
 	 */
@@ -157,7 +157,6 @@ Class Field_limits_number_ft extends EE_Fieldtype
 
 	/**
 	 * Display field
-	 *
 	 * @param mixed $data
 	 * @return string
 	 */
@@ -191,7 +190,6 @@ Class Field_limits_number_ft extends EE_Fieldtype
 
 	/**
 	 * Display Low Variables field
-	 *
 	 * @param mixed $data
 	 * @return string
 	 */
@@ -204,7 +202,6 @@ Class Field_limits_number_ft extends EE_Fieldtype
 
 	/**
 	 * Validate field data
-	 *
 	 * @param array $data Submitted field data
 	 * @return mixed
 	 */
@@ -223,20 +220,20 @@ Class Field_limits_number_ft extends EE_Fieldtype
 
 		$errors = '';
 
-		if ($settings['content'] === 'num' and ! is_numeric($data)) {
+		if ($settings['content'] === 'num' && ! is_numeric($data)) {
 			$errors .= lang('field_limits_numeric_only') . '<br>';
 		}
 
-		if ($settings['content'] === 'int' and ! ctype_digit($data)) {
+		if ($settings['content'] === 'int' && ! ctype_digit($data)) {
 			$errors .= lang('field_limits_whole_number') . '<br>';
 		}
 
-		if ($settings['min'] and (int) $data < $settings['min']) {
+		if ($settings['min'] && (int) $data < $settings['min']) {
 			$errors .= lang('field_limits_greater_than') .
 				$settings['min'] . '<br>';
 		}
 
-		if ($settings['max'] and (int) $data > $settings['max']) {
+		if ($settings['max'] && (int) $data > $settings['max']) {
 			$errors .= lang('field_limits_less_than') .
 				$settings['max'] . '<br>';
 		}
@@ -250,8 +247,7 @@ Class Field_limits_number_ft extends EE_Fieldtype
 
 	/**
 	 * Validate Low Variables field
-	 *
-	 * @param string $data
+	 * @param mixed $data
 	 * @return mixed
 	 */
 	public function var_save($data)
@@ -271,13 +267,15 @@ Class Field_limits_number_ft extends EE_Fieldtype
 
 	/**
 	 * Replace tag
-	 *
 	 * @param string $fieldData
 	 * @param array $tagParams
 	 * @return string
 	 */
-	public function replace_tag($fieldData, $tagParams = array(), $tagData = false)
-	{
+	public function replace_tag(
+		$fieldData,
+		$tagParams = array(),
+		$tagData = false
+	) {
 		$fieldData = html_entity_decode($fieldData);
 
 		$fieldSettings = new Helper\FieldSettings();
@@ -293,13 +291,15 @@ Class Field_limits_number_ft extends EE_Fieldtype
 
 	/**
 	 * Display Low Variables tag
-	 *
 	 * @param string $fieldData
 	 * @param array $tagParams
 	 * @return string
 	 */
-	public function var_replace_tag($fieldData, $tagParams = array(), $tagData = false)
-	{
+	public function var_replace_tag(
+		$fieldData,
+		$tagParams = array(),
+		$tagData = false
+	) {
 		return $this->replace_tag($fieldData, $tagParams);
 	}
 }

@@ -1,7 +1,4 @@
-<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
-
-// Include configuration
-include_once(PATH_THIRD . 'field_limits/addon.setup.php');
+<?php
 
 /**
  * Field Limits textarea field type
@@ -15,20 +12,29 @@ include_once(PATH_THIRD . 'field_limits/addon.setup.php');
 use FieldLimits\Helper;
 use FieldLimits\Service;
 
+/**
+ * Class Field_limits_textarea_ft
+ */
 Class Field_limits_textarea_ft extends EE_Fieldtype
 {
-	// Set EE fieldtype info
+	/** @var array $info */
 	public $info = array(
 		'name' => 'Field Limits - Textarea',
 		'version' => FIELD_LIMITS_VER
 	);
 
+	/**
+	 * Field_limits_textarea_ft constructor.
+	 */
 	public function __construct()
 	{
 		// Make sure Field Limits is really being requested
-		if (
-			ee()->uri->segment(1) === 'cp' &&
-			in_array(PATH_THIRD . 'field_limits/', ee()->config->_config_paths)
+		if (ee()->uri->segment(1) === 'cp' &&
+			in_array(
+				PATH_THIRD . 'field_limits/',
+				ee()->config->_config_paths,
+				true
+			)
 		) {
 			ee()->lang->loadfile('field_limits');
 		}
@@ -39,7 +45,6 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 
 	/**
 	 * Specify compatibility
-	 *
 	 * @param string $name
 	 * @return bool
 	 */
@@ -50,7 +55,6 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 
 	/**
 	 * Settings
-	 *
 	 * @param array $data Existing setting data
 	 * @return array
 	 */
@@ -74,7 +78,6 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 
 	/**
 	 * Display grid settings
-	 *
 	 * @param array $data Existing field data
 	 * @return array
 	 */
@@ -96,7 +99,6 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 
 	/**
 	 * Display Low Variables settings
-	 *
 	 * @param array $data Existing setting data
 	 * @return array
 	 */
@@ -118,7 +120,6 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 
 	/**
 	 * Save settings
-	 *
 	 * @param array $data
 	 * @return array
 	 */
@@ -131,7 +132,6 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 
 	/**
 	 * Save Low Variables settings
-	 *
 	 * @param array $data
 	 * @return array
 	 */
@@ -153,7 +153,6 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 
 	/**
 	 * Display field
-	 *
 	 * @param mixed $data
 	 * @return string
 	 */
@@ -190,7 +189,6 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 
 	/**
 	 * Display Low Variables field
-	 *
 	 * @param mixed $data
 	 * @return string
 	 */
@@ -203,8 +201,7 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 
 	/**
 	 * Validate field data
-	 *
-	 * @param array $data Submitted field data
+	 * @param mixed $data Submitted field data
 	 * @return mixed
 	 */
 	public function validate($data)
@@ -222,7 +219,7 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 
 		$errors = '';
 
-		if ($settings['max_length'] and strlen($data) > $settings['max_length']) {
+		if ($settings['max_length'] && strlen($data) > $settings['max_length']) {
 			$errors .= lang('field_limits_char_count_not_greater_than') .
 				$settings['max_length'] . '<br>';
 		}
@@ -236,7 +233,6 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 
 	/**
 	 * Validate Low Variables field
-	 *
 	 * @param string $data
 	 * @return mixed
 	 */
@@ -257,13 +253,15 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 
 	/**
 	 * Replace tag
-	 *
 	 * @param string $fieldData
 	 * @param array $tagParams
 	 * @return string
 	 */
-	public function replace_tag($fieldData, $tagParams = array(), $tagData = false)
-	{
+	public function replace_tag(
+		$fieldData,
+		$tagParams = array(),
+		$tagData = false
+	) {
 		$fieldData = html_entity_decode($fieldData);
 
 		$fieldSettings = new Helper\FieldSettings();
@@ -279,13 +277,15 @@ Class Field_limits_textarea_ft extends EE_Fieldtype
 
 	/**
 	 * Display Low Variables tag
-	 *
 	 * @param string $fieldData
 	 * @param array $tagParams
 	 * @return string
 	 */
-	public function display_var_tag($fieldData, $tagParams = array(), $tagData = false)
-	{
+	public function display_var_tag(
+		$fieldData,
+		$tagParams = array(),
+		$tagData = false
+	) {
 		return $this->replace_tag($fieldData, $tagParams);
 	}
 }
