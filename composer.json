@@ -1,18 +1,43 @@
 {
+    "name": "tjdraper/field-limits",
+    "version": "1.1.0",
+    "description": "Fieldtypes for text input/textarea limits",
+    "type": "ee-add-on",
+    "authors": [
+        {
+            "name": "TJ Draper",
+            "email": "tj@buzzingpixel.com",
+            "homepage": "https://buzzingpixel.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:tjdraper/expressionengine.git"
+        }
+    ],
     "require": {
-        "roave/security-advisories": "dev-master",
+        "roave/security-advisories": "dev-master"
+    },
+    "require-dev": {
         "tjdraper/expressionengine": "dev-version-4"
     },
     "autoload": {
         "psr-0": {
             "stats": "",
             "EllisLab\\" : "libraries/ExpressionEngine/system/ee/EllisLab/"
+        },
+        "psr-4": {
+            "BuzzingPixel\\FieldLimits\\": "field_limits/"
         }
+
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:tjdraper/expressionengine.git"
-        }
-    ]
+    "extra": {
+        "handle": "field_limits",
+        "systemPath": "field_limits"
+    }
 }
