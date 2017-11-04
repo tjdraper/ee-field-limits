@@ -34,6 +34,4 @@ Installing and updating Field Limits is very easy.
 4. Log in to your EE control panel and navigate to the Add-on Manager
 5. Scroll down to the “Third Party” section, locate “Field Limits” in the list and click “Install” or “Update”
 
-You can now either install or update Executive from the EE control panel or from the command line.
-
 Field Limits is now installed or updated.
