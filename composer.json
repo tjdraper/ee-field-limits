@@ -1,6 +1,6 @@
 {
     "name": "tjdraper/field-limits",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Fieldtypes for text input/textarea limits",
     "type": "ee-add-on",
     "authors": [
@@ -38,6 +38,7 @@
     },
     "extra": {
         "handle": "field_limits",
-        "systemPath": "field_limits"
+        "systemPath": "field_limits",
+        "themePath": "field_limits_themes"
     }
 }
